@@ -3,26 +3,41 @@ using System.Collections;
 
 public class MovmentPlayer : MonoBehaviour 
 {
+	public static MovmentPlayer player;
+
 	public Animator anim;
 
-	bool stop;
+	public bool stop;
+	public bool fight;
+
+	public float velX = 3;
+
 	bool esquiva;
 	bool attackPower;
 	bool attack;
+
+	void Awake()
+	{
+		player = this;
+	}
+
+	void Start()
+	{
+		anim.SetFloat ("VelX", velX);
+	}
 
 	void Update ()
 	{
 		if(!esquiva && !attack && !attackPower && !stop)
 		{
 			anim.SetTrigger("Run");
-			transform.Translate(1 * Time.deltaTime, 0, 0);
+			transform.Translate(velX * Time.deltaTime, 0, 0);
 		}
 
 		if(Input.GetKeyDown(KeyCode.LeftArrow) && !attack)
 		{
-			anim.SetTrigger("Idle");
+			anim.SetTrigger("Base");
 			esquiva = true;
-			StartCoroutine("GO");
 		}
 		else if(Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
 		{
@@ -31,13 +46,16 @@ public class MovmentPlayer : MonoBehaviour
 		}
 		else if(Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
 		{
-			stop = false;
+			if(!fight)
+			{
+				stop = false;
+			}
 			anim.SetTrigger("Attack");
 			attack = true;
 			StopCoroutine ("HeavyAttack");
 		}
 
-		if(Input.GetKeyUp(KeyCode.RightArrow))
+		if(Input.GetKeyUp(KeyCode.RightArrow) && !fight)
 		{
 			stop = false;
 		}
@@ -49,10 +67,26 @@ public class MovmentPlayer : MonoBehaviour
 		}
 	}
 
+	public void StopPlayer()
+	{
+		velX = 0;
+		anim.SetFloat ("VelX", velX);
+		fight = true;
+		anim.SetTrigger("Idle");
+		stop = true;
+	}
+
+	public void IsFight()
+	{
+		if(fight)
+		{
+			anim.SetTrigger("Idle");
+		}
+	}
+
 	IEnumerator HeavyAttack()
 	{
 		yield return new WaitForSeconds (1);
-		print("Foca jovem");
 		attackPower = true;
 	}
 
@@ -66,10 +100,8 @@ public class MovmentPlayer : MonoBehaviour
 		attack = false;
 	}
 
-	IEnumerator GO()
+	public void Esquivei()
 	{
-		yield return new WaitForSeconds (1);
 		esquiva = false;
-		StopCoroutine("GO");
 	}
 }
