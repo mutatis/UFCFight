@@ -12,6 +12,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	public float velX = 3;
 
+	GameObject obj;
+
 	bool esquiva;
 	bool attackPower;
 	bool attack;
@@ -36,6 +38,7 @@ public class MovmentPlayer : MonoBehaviour
 
 		if(Input.GetKeyDown(KeyCode.LeftArrow) && !attack)
 		{
+			Defesa();
 			anim.SetTrigger("Base");
 			esquiva = true;
 		}
@@ -50,6 +53,7 @@ public class MovmentPlayer : MonoBehaviour
 			{
 				stop = false;
 			}
+			Attack();
 			anim.SetTrigger("Attack");
 			attack = true;
 			StopCoroutine ("HeavyAttack");
@@ -62,6 +66,7 @@ public class MovmentPlayer : MonoBehaviour
 
 		if(attackPower && Input.GetKeyUp(KeyCode.RightArrow))
 		{
+			AttackF();
 			anim.SetTrigger("HeavyAttack");
 			StopCoroutine ("HeavyAttack");
 		}
@@ -84,6 +89,21 @@ public class MovmentPlayer : MonoBehaviour
 		}
 	}
 
+	void Attack()
+	{
+		print("bateu");
+	}
+
+	void AttackF()
+	{
+		print("attack forte");
+	}
+
+	void Defesa()
+	{
+		print ("defendeu");
+	}
+
 	IEnumerator HeavyAttack()
 	{
 		yield return new WaitForSeconds (1);
@@ -103,5 +123,13 @@ public class MovmentPlayer : MonoBehaviour
 	public void Esquivei()
 	{
 		esquiva = false;
+	}
+
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if(collision.gameObject.tag == "Enemy")
+		{
+			obj = collision.gameObject;
+		}
 	}
 }
