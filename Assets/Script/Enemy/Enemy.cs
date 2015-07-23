@@ -6,7 +6,11 @@ public class Enemy : MonoBehaviour
 	public Animator anim;
 
 	public float velX = -1.5f;
-	public float distancia;
+	//distancia para socar ou defender
+	public float distanciaSD;
+	public float distanciaSprawl;
+
+	public int escolha;
 
 	float dist;
 	float temp;
@@ -23,7 +27,12 @@ public class Enemy : MonoBehaviour
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
 
-		if(dist <= distancia && !fight)
+		if(dist <= distanciaSprawl)
+		{
+			//sprawl
+		}
+
+		if(dist <= distanciaSD && !fight)
 		{
 			velX = 0;
 			anim.SetFloat("velX", velX);
@@ -31,7 +40,7 @@ public class Enemy : MonoBehaviour
 			Combat ();
 		}
 
-		if(dist > distancia && !fight)
+		if(dist > distanciaSD && !fight)
 		{
 			velX = temp;
 			transform.Translate(velX * Time.deltaTime, 0, 0);
