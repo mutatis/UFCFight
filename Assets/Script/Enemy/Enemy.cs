@@ -43,18 +43,19 @@ public class Enemy : MonoBehaviour
 			switch(selectSprawl)
 			{
 				case 0:
-					if(dist > distanciaSprawl - 1)
+					if(dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
 					{
+						print("paro");
 						velX = 0;
-						anim.SetFloat("velX", velX);
+						anim.SetFloat("VelX", velX);
 						anim.SetTrigger("Idle");
 					}
-					if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+					else if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
 					{
 						fight = true;
 						velX = temp;
-						transform.Translate(velX, 0, 0);
-						anim.SetFloat("velX", velX);
+						transform.Translate((velX * 10) * Time.deltaTime, 0, 0);
+						anim.SetFloat("VelX", velX);
 						anim.SetTrigger("Sprawl");
 					}
 					else if(dist <= distanciaSD)
@@ -62,6 +63,11 @@ public class Enemy : MonoBehaviour
 						Combat();
 						sprawl = true;
 						velX = 0;
+					}
+					else
+					{
+						velX = temp;
+						transform.Translate(velX * Time.deltaTime, 0, 0);
 					}
 				break;
 
@@ -71,7 +77,7 @@ public class Enemy : MonoBehaviour
 					fight = true;
 					velX = temp;
 					transform.Translate(velX, 0, 0);
-					anim.SetFloat("velX", velX);
+					anim.SetFloat("VelX", velX);
 					anim.SetTrigger("Run");
 				}
 				else if(dist <= distanciaSD)
@@ -90,7 +96,7 @@ public class Enemy : MonoBehaviour
 			if(dist <= distanciaSD && !fight)
 			{
 				velX = 0;
-				anim.SetFloat("velX", velX);
+				anim.SetFloat("VelX", velX);
 				anim.SetTrigger("Idle");
 				Combat ();
 			}
