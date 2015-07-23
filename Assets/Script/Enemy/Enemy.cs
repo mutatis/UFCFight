@@ -21,31 +21,52 @@ public class Enemy : MonoBehaviour
 	{
 		temp = velX;
 		anim.SetFloat ("VelX", velX);
+		escolha = Random.Range (0, 2);
 	}
 
 	void Update()
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
 
-		if(dist <= distanciaSprawl)
+		if(escolha == 0)
 		{
-			//sprawl
+			if(dist <= distanciaSprawl)
+			{
+				//sprawl
+				fight = true;
+				velX = 0;
+				anim.SetFloat("velX", velX);
+				anim.SetTrigger("Idle");
+			}
+			else
+			{
+				velX = temp;
+				transform.Translate(velX * Time.deltaTime, 0, 0);
+			}
 		}
 
-		if(dist <= distanciaSD && !fight)
+		if(escolha == 1)
 		{
-			velX = 0;
-			anim.SetFloat("velX", velX);
-			anim.SetTrigger("Idle");
-			Combat ();
-		}
 
-		if(dist > distanciaSD && !fight)
-		{
-			velX = temp;
-			transform.Translate(velX * Time.deltaTime, 0, 0);
+			if(dist <= distanciaSD && !fight)
+			{
+				velX = 0;
+				anim.SetFloat("velX", velX);
+				anim.SetTrigger("Idle");
+				Combat ();
+			}
+
+			if(dist > distanciaSD && !fight)
+			{
+				velX = temp;
+				transform.Translate(velX * Time.deltaTime, 0, 0);
+			}
+			else
+			{
+				velX = 0;
+			}
 		}
-		else
+		if(fight)
 		{
 			velX = 0;
 		}
