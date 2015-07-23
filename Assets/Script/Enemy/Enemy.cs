@@ -14,12 +14,14 @@ public class Enemy : MonoBehaviour
 	public int escolha;
 
 	int selectSprawl;
+	int selectAttack;
 
 	float dist;
 	float temp;
 
 	bool fight;
 	bool sprawl;
+	bool para;
 
 	void Start()
 	{
@@ -30,6 +32,11 @@ public class Enemy : MonoBehaviour
 		{
 			selectSprawl = 0;
 				//Random.Range(0, 4);
+		}
+		else
+		{
+			selectAttack = 0;
+				//Random.Range(0, 2);
 		}
 	}
 
@@ -60,6 +67,7 @@ public class Enemy : MonoBehaviour
 					}
 					else if(dist <= distanciaSD)
 					{
+						anim.SetTrigger("Idle");
 						Combat();
 						sprawl = true;
 						velX = 0;
@@ -72,44 +80,56 @@ public class Enemy : MonoBehaviour
 				break;
 
 				case 1:
-				if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
-				{
-					fight = true;
-					velX = temp;
-					transform.Translate(velX, 0, 0);
-					anim.SetFloat("VelX", velX);
-					anim.SetTrigger("Run");
-				}
-				else if(dist <= distanciaSD)
-				{
-					Combat();
-					sprawl = true;
-					velX = 0;
-				}
+					if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+					{
+						fight = true;
+						velX = temp;
+						transform.Translate(velX, 0, 0);
+						anim.SetFloat("VelX", velX);
+						anim.SetTrigger("Run");
+					}
+					else if(dist <= distanciaSD)
+					{
+						Combat();
+						sprawl = true;
+						velX = 0;
+					}
 				break;
 			}
 		}
-
-		if(escolha == 1)
+		else if(escolha == 1)
 		{
+			switch(selectAttack)
+			{
+				case 0:
+					if(dist <= distanciaSD && !fight)
+					{
+						velX = 0;
+						anim.SetFloat("VelX", velX);
+						anim.SetTrigger("Idle");
+						Combat ();
+					}
+					
+					if(dist > distanciaSD && !fight)
+					{
+						velX = temp;
+						transform.Translate(velX * Time.deltaTime, 0, 0);
+					}
+					else
+					{
+						velX = 0;
+					}
+				break;
 
-			if(dist <= distanciaSD && !fight)
-			{
-				velX = 0;
-				anim.SetFloat("VelX", velX);
-				anim.SetTrigger("Idle");
-				Combat ();
+				case 1:
+					anim.SetTrigger("Attack");
+				break;
+
+				case 2:
+					anim.SetTrigger("Defesa");
+				break;
 			}
 
-			if(dist > distanciaSD && !fight)
-			{
-				velX = temp;
-				transform.Translate(velX * Time.deltaTime, 0, 0);
-			}
-			else
-			{
-				velX = 0;
-			}
 		}
 		if(fight)
 		{
@@ -117,9 +137,22 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+	IEnumerator SelectAttack()
+	{
+		yield return new WaitForSeconds (1);
+		selectAttack = Random.Range (0, 3);
+		StartCoroutine("SelectAttack");
+	}
+
 	void Combat()
 	{
+		escolha = 1;
+		if(!para)
+		{
+			StartCoroutine("SelectAttack");
+			MovmentPlayer.player.StopPlayer ();
+			para = true;
+		}
 		fight = true;
-		MovmentPlayer.player.StopPlayer ();
 	}
 }
