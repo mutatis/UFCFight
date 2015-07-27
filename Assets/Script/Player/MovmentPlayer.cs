@@ -9,6 +9,7 @@ public class MovmentPlayer : MonoBehaviour
 
 	public bool stop;
 	public bool fight;
+	public bool prepareAttack;
 
 	public int life;
 
@@ -56,11 +57,13 @@ public class MovmentPlayer : MonoBehaviour
 		}
 		else if(Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
 		{
+			prepareAttack = true;
 			stop = true;
 			StartCoroutine("HeavyAttack");
 		}
 		else if(Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
 		{
+			prepareAttack = false;
 			if(!fight)
 			{
 				stop = false;
@@ -155,6 +158,7 @@ public class MovmentPlayer : MonoBehaviour
 	IEnumerator HeavyAttack()
 	{
 		yield return new WaitForSeconds (1);
+		prepareAttack = false;
 		attackPower = true;
 	}
 

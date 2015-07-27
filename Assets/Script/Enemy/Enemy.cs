@@ -17,6 +17,10 @@ public class Enemy : MonoBehaviour
 	[HideInInspector]
 	public int selectAttack;
 
+	MovmentPlayer player;
+
+	GameObject obj;
+
 	int selectSprawl;
 
 	float dist;
@@ -167,6 +171,8 @@ public class Enemy : MonoBehaviour
 	public void Dano()
 	{
 		anim.SetTrigger("Dano");
+		StopCoroutine("SelectAttack");
+		StartCoroutine ("SelectAttack");
 	}
 
 	public void Attack()
@@ -177,7 +183,12 @@ public class Enemy : MonoBehaviour
 	IEnumerator SelectAttack()
 	{
 		yield return new WaitForSeconds (1);
+		player = obj.GetComponent<MovmentPlayer> ();
 		intervalo = false;
+		if(player.prepareAttack == true)
+		{
+			//escolhe o ataque 
+		}
 		selectAttack = Random.Range (0, 3);
 		StartCoroutine("SelectAttack");
 	}
@@ -199,5 +210,13 @@ public class Enemy : MonoBehaviour
 			para = true;
 		}
 		fight = true;
+	}
+
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if(collision.gameObject.tag == "Player")
+		{
+			obj = collision.gameObject;
+		}
 	}
 }
