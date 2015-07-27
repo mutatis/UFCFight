@@ -12,9 +12,12 @@ public class Enemy : MonoBehaviour
 	public float distFight;
 
 	public int escolha;
+	public int life;
+
+	[HideInInspector]
+	public int selectAttack;
 
 	int selectSprawl;
-	int selectAttack;
 
 	float dist;
 	float temp;
@@ -43,6 +46,11 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
+
+		if(life <= 0)
+		{
+			Kill();
+		}
 
 		if(escolha == 0)
 		{
@@ -152,6 +160,13 @@ public class Enemy : MonoBehaviour
 		yield return new WaitForSeconds (1);
 		selectAttack = Random.Range (0, 3);
 		StartCoroutine("SelectAttack");
+	}
+
+	void Kill()
+	{
+		fight = false;
+		MovmentPlayer.player.ReturnPlayerMov ();
+		Destroy (gameObject);
 	}
 
 	void Combat()

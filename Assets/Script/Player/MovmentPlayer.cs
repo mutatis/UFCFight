@@ -16,6 +16,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	GameObject obj;
 
+	Enemy enemy;
+
 	bool esquiva;
 	bool attackPower;
 	bool attack;
@@ -84,6 +86,15 @@ public class MovmentPlayer : MonoBehaviour
 		stop = true;
 	}
 
+	public void ReturnPlayerMov()
+	{
+		velX = temp;
+		anim.SetFloat ("VelX", velX);
+		fight = false;
+		anim.SetTrigger("Run");
+		stop = false;
+	}
+
 	public void IsFight()
 	{
 		if(fight)
@@ -94,11 +105,21 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Attack()
 	{
+		enemy = obj.GetComponent<Enemy> ();
+		if(enemy.selectAttack == 1)
+		{
+			enemy.life -= 2;
+		}
 		print("bateu");
 	}
 
 	void AttackF()
 	{
+		enemy = obj.GetComponent<Enemy> ();
+		if(enemy.selectAttack == 2)
+		{
+			enemy.life -= 4;
+		}
 		print("attack forte");
 	}
 
