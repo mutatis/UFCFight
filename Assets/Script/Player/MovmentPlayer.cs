@@ -12,6 +12,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	public float velX = 3;
 
+	float temp;
+
 	GameObject obj;
 
 	bool esquiva;
@@ -25,6 +27,7 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Start()
 	{
+		temp = velX;
 		anim.SetFloat ("VelX", velX);
 	}
 
@@ -101,6 +104,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Defesa()
 	{
+		velX = 0;
+		anim.SetFloat ("VelX", velX);
 		print ("defendeu");
 	}
 
@@ -122,6 +127,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	public void Esquivei()
 	{
+		velX = temp;
+		anim.SetFloat ("VelX", velX);
 		esquiva = false;
 	}
 
