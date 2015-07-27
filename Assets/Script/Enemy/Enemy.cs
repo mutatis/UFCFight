@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 	bool fight;
 	bool sprawl;
 	bool para;
+	bool intervalo;
 
 	void Start()
 	{
@@ -140,11 +141,19 @@ public class Enemy : MonoBehaviour
 				break;
 
 				case 1:
-					anim.SetTrigger("Attack");
+					if(!intervalo)
+					{
+						anim.SetTrigger("Attack");
+						intervalo = true;
+					}
 				break;
 
 				case 2:
-					anim.SetTrigger("Defesa");
+					if(!intervalo)
+					{
+						anim.SetTrigger("Defesa");
+						intervalo = true;
+					}
 				break;
 			}
 
@@ -155,9 +164,20 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+	public void Dano()
+	{
+		anim.SetTrigger("Dano");
+	}
+
+	public void Attack()
+	{
+		MovmentPlayer.player.life -= 1;
+	}
+
 	IEnumerator SelectAttack()
 	{
 		yield return new WaitForSeconds (1);
+		intervalo = false;
 		selectAttack = Random.Range (0, 3);
 		StartCoroutine("SelectAttack");
 	}

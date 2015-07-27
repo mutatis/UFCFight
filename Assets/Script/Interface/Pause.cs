@@ -17,6 +17,7 @@ public class Pause : MonoBehaviour
 
 	public void Menu(string menu)
 	{
+		Time.timeScale = 1;
 		Application.LoadLevel (menu);
 	}
 }

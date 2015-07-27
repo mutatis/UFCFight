@@ -10,6 +10,8 @@ public class MovmentPlayer : MonoBehaviour
 	public bool stop;
 	public bool fight;
 
+	public int life;
+
 	public float velX = 3;
 
 	float temp;
@@ -35,6 +37,11 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Update ()
 	{
+		if(life <= 0)
+		{
+			Morreu();
+		}
+
 		if(!esquiva && !attack && !attackPower && !stop)
 		{
 			anim.SetTrigger("Run");
@@ -64,17 +71,24 @@ public class MovmentPlayer : MonoBehaviour
 			StopCoroutine ("HeavyAttack");
 		}
 
-		if(Input.GetKeyUp(KeyCode.RightArrow) && !fight)
+		if(Input.GetKeyUp(KeyCode.RightArrow))
 		{
-			stop = false;
+			if(!fight)
+			{
+				stop = false;
+			}
+			else if(attackPower)
+			{
+				AttackF();
+				anim.SetTrigger("HeavyAttack");
+				StopCoroutine ("HeavyAttack");
+			}
 		}
+	}
 
-		if(attackPower && Input.GetKeyUp(KeyCode.RightArrow))
-		{
-			AttackF();
-			anim.SetTrigger("HeavyAttack");
-			StopCoroutine ("HeavyAttack");
-		}
+	void Morreu()
+	{
+		Application.LoadLevel("GameOver");
 	}
 
 	public void StopPlayer()
@@ -105,20 +119,28 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Attack()
 	{
-		enemy = obj.GetComponent<Enemy> ();
-		if(enemy.selectAttack == 1)
+		if(obj != null)
 		{
-			enemy.life -= 2;
+			enemy = obj.GetComponent<Enemy> ();
+			if(enemy.selectAttack == 1)
+			{
+				enemy.Dano();
+				enemy.life -= 2;
+			}
 		}
 		print("bateu");
 	}
 
 	void AttackF()
 	{
-		enemy = obj.GetComponent<Enemy> ();
-		if(enemy.selectAttack == 2)
+		if(obj != null)
 		{
-			enemy.life -= 4;
+			enemy = obj.GetComponent<Enemy> ();
+			if(enemy.selectAttack == 2)
+			{
+				enemy.Dano();
+				enemy.life -= 4;
+			}
 		}
 		print("attack forte");
 	}
