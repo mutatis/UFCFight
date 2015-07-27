@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
 			switch(selectSprawl)
 			{
 				case 0:
+				//Vai da Sprawl;
 					if(dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
 					{
 						print("paro");
@@ -80,6 +81,7 @@ public class Enemy : MonoBehaviour
 				break;
 
 				case 1:
+				//Corre pra frente e ataca ao se aproxima sem da sprawl;
 					if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
 					{
 						fight = true;
@@ -94,6 +96,14 @@ public class Enemy : MonoBehaviour
 						sprawl = true;
 						velX = 0;
 					}
+				break;
+
+				case 2:
+				//fake sprawl;
+				break;
+
+				default:
+				//sei la
 				break;
 			}
 		}
