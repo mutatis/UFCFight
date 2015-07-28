@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
 					{
 						fight = true;
 						velX = temp;
-						transform.Translate(velX, 0, 0);
+						transform.Translate(velX * Time.deltaTime, 0, 0);
 						anim.SetFloat("VelX", velX);
 						anim.SetTrigger("Run");
 					}
@@ -120,7 +120,8 @@ public class Enemy : MonoBehaviour
 				break;
 			}
 		}
-		else if(escolha == 1)
+
+		if(escolha == 1)
 		{
 			switch(selectAttack)
 			{
@@ -143,25 +144,9 @@ public class Enemy : MonoBehaviour
 						velX = 0;
 					}
 				break;
-
-				case 1:
-					if(!intervalo)
-					{
-						anim.SetTrigger("Attack");
-						intervalo = true;
-					}
-				break;
-
-				case 2:
-					if(!intervalo)
-					{
-						anim.SetTrigger("Defesa");
-						intervalo = true;
-					}
-				break;
 			}
-
 		}
+
 		if(fight)
 		{
 			velX = 0;
@@ -177,19 +162,63 @@ public class Enemy : MonoBehaviour
 
 	public void Attack()
 	{
+		ReCombat ();
 		MovmentPlayer.player.life -= 1;
+		MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
 	}
 
 	IEnumerator SelectAttack()
 	{
 		yield return new WaitForSeconds (1);
-		player = obj.GetComponent<MovmentPlayer> ();
+		if(obj != null)
+		{
+			player = obj.GetComponent<MovmentPlayer> ();
+		}
 		intervalo = false;
 		if(player.prepareAttack == true)
 		{
 			//escolhe o ataque 
 		}
 		selectAttack = Random.Range (0, 3);
+		switch(selectAttack)
+		{
+			case 0:
+				if(dist <= distanciaSD && !fight)
+				{
+					velX = 0;
+					anim.SetFloat("VelX", velX);
+					anim.SetTrigger("Idle");
+					Combat ();
+				}
+				
+				if(dist > distanciaSD && !fight)
+				{
+					velX = temp;
+					transform.Translate(velX * Time.deltaTime, 0, 0);
+				}
+				else
+				{
+					velX = 0;
+				}
+			break;
+				
+			case 1:
+				if(!intervalo)
+				{
+					Attack ();
+					anim.SetTrigger("Attack");
+					intervalo = true;
+				}
+			break;
+				
+			case 2:
+				if(!intervalo)
+				{
+					anim.SetTrigger("Defesa");
+					intervalo = true;
+				}
+			break;
+		}
 		StartCoroutine("SelectAttack");
 	}
 
@@ -212,11 +241,31 @@ public class Enemy : MonoBehaviour
 		fight = true;
 	}
 
+	void ReCombat()
+	{
+		anim.SetTrigger("Run");
+		escolha = 0;
+		if(para)
+		{
+			StopCoroutine("SelectAttack");
+			MovmentPlayer.player.ReturnPlayerMov ();
+			para = false;
+		}
+		fight = false;
+	}
+
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.gameObject.tag == "Player")
 		{
 			obj = collision.gameObject;
+		}
+	}
+	void OnTriggerExit2D(Collider2D collision)
+	{
+		if(collision.gameObject.tag == "Player")
+		{
+			obj = null;
 		}
 	}
 }

@@ -7,6 +7,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	public Animator anim;
 
+	public Rigidbody2D rig;
+
 	public bool stop;
 	public bool fight;
 	public bool prepareAttack;
@@ -38,6 +40,15 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Update ()
 	{
+		if(rig.velocity.x < 0)
+		{
+			rig.velocity = new Vector2((rig.velocity.x + 0.05f), 0);
+		}
+		else
+		{
+			rig.velocity = new Vector2(0, 0);
+		}
+
 		if(life <= 0)
 		{
 			Morreu();
@@ -45,6 +56,7 @@ public class MovmentPlayer : MonoBehaviour
 
 		if(!esquiva && !attack && !attackPower && !stop)
 		{
+			velX = temp;
 			anim.SetTrigger("Run");
 			transform.Translate(velX * Time.deltaTime, 0, 0);
 		}
@@ -73,6 +85,12 @@ public class MovmentPlayer : MonoBehaviour
 			attack = true;
 			StopCoroutine ("HeavyAttack");
 		}
+		/*else if(fight)
+		{
+			velX = temp / 2;
+			anim.SetTrigger("Run");
+			transform.Translate(velX * Time.deltaTime, 0, 0);
+		}*/
 
 		if(Input.GetKeyUp(KeyCode.RightArrow))
 		{
@@ -184,6 +202,13 @@ public class MovmentPlayer : MonoBehaviour
 		if(collision.gameObject.tag == "Enemy")
 		{
 			obj = collision.gameObject;
+		}
+	}
+	void OnTriggerExit2D(Collider2D collision)
+	{
+		if(collision.gameObject.tag == "Enemy")
+		{
+			obj = null;
 		}
 	}
 }
