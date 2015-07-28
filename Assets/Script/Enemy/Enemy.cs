@@ -5,6 +5,8 @@ public class Enemy : MonoBehaviour
 {
 	public Animator anim;
 
+	public Rigidbody2D rig;
+
 	public float velX = -1.5f;
 	//distancia para socar ou defender
 	public float distanciaSD;
@@ -52,6 +54,15 @@ public class Enemy : MonoBehaviour
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
 
+		if(rig.velocity.x > 0)
+		{
+			rig.velocity = new Vector2((rig.velocity.x - 0.05f), 0);
+		}
+		else
+		{
+			rig.velocity = new Vector2(0, 0);
+		}
+
 		if(life <= 0)
 		{
 			Kill();
@@ -66,7 +77,6 @@ public class Enemy : MonoBehaviour
 				//Vai da Sprawl;
 					if(dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
 					{
-						print("paro");
 						velX = 0;
 						anim.SetFloat("VelX", velX);
 						anim.SetTrigger("Idle");
@@ -158,6 +168,8 @@ public class Enemy : MonoBehaviour
 		anim.SetTrigger("Dano");
 		StopCoroutine("SelectAttack");
 		StartCoroutine ("SelectAttack");
+		ReCombat ();
+		rig.velocity = new Vector2 (4, 0);
 	}
 
 	public void Attack()
@@ -205,6 +217,9 @@ public class Enemy : MonoBehaviour
 			case 1:
 				if(!intervalo)
 				{
+					anim.SetTrigger("PAttack");
+					print("atacenegoooo");
+					yield return new WaitForSeconds(1f);
 					Attack ();
 					anim.SetTrigger("Attack");
 					intervalo = true;
@@ -243,8 +258,9 @@ public class Enemy : MonoBehaviour
 
 	void ReCombat()
 	{
+		anim.SetFloat ("VelX", temp);
 		anim.SetTrigger("Run");
-		anim.SetInteger ("VelX", 0);
+		selectSprawl = 0;
 		escolha = 0;
 		if(para)
 		{
