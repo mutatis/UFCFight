@@ -92,10 +92,17 @@ public class Enemy : MonoBehaviour
 					}
 					else if(dist <= distanciaSD)
 					{
-						anim.SetTrigger("Idle");
-						Combat();
-						sprawl = true;
-						velX = 0;
+						if(!MovmentPlayer.player.esquiva)
+						{
+							Attack();
+						}
+						else
+						{
+							anim.SetTrigger("Idle");
+							Combat();
+							sprawl = true;
+							velX = 0;
+						}
 					}
 					else
 					{
@@ -190,10 +197,10 @@ public class Enemy : MonoBehaviour
 			player = obj.GetComponent<MovmentPlayer> ();
 		}
 		intervalo = false;
-		if(player.prepareAttack == true)
-		{
-			//escolhe o ataque 
-		}
+//		if(player.prepareAttack == true)
+	//	{
+	//		//escolhe o ataque 
+	//	}
 		selectAttack = Random.Range (0, 3);
 		switch(selectAttack)
 		{
@@ -221,7 +228,6 @@ public class Enemy : MonoBehaviour
 				if(!intervalo)
 				{
 					anim.SetTrigger("PAttack");
-					print("atacenegoooo");
 					yield return new WaitForSeconds(1f);
 					Attack ();
 					anim.SetTrigger("Attack");

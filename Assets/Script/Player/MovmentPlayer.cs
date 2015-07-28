@@ -12,6 +12,7 @@ public class MovmentPlayer : MonoBehaviour
 	public bool stop;
 	public bool fight;
 	public bool prepareAttack;
+	public bool esquiva;
 
 	public int life;
 
@@ -23,7 +24,6 @@ public class MovmentPlayer : MonoBehaviour
 
 	Enemy enemy;
 
-	bool esquiva;
 	bool attackPower;
 	bool attack;
 
@@ -149,7 +149,6 @@ public class MovmentPlayer : MonoBehaviour
 				enemy.life -= 2;
 			}
 		}
-		print("bateu");
 	}
 
 	void AttackF()
@@ -163,14 +162,12 @@ public class MovmentPlayer : MonoBehaviour
 				enemy.life -= 4;
 			}
 		}
-		print("attack forte");
 	}
 
 	void Defesa()
 	{
 		velX = 0;
 		anim.SetFloat ("VelX", velX);
-		print ("defendeu");
 	}
 
 	IEnumerator HeavyAttack()
