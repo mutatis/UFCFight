@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
 	float dist;
 	float temp;
 
+	bool anda;
 	bool fight;
 	bool sprawl;
 	bool para;
@@ -53,7 +54,7 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
-
+	
 		if(rig.velocity.x > 0)
 		{
 			rig.velocity = new Vector2((rig.velocity.x - 0.05f), 0);
@@ -98,7 +99,9 @@ public class Enemy : MonoBehaviour
 					}
 					else
 					{
-						velX = temp;
+						velX = temp;					
+						anim.SetFloat ("VelX", temp);
+						anim.SetTrigger("Run");
 						transform.Translate(velX * Time.deltaTime, 0, 0);
 					}
 				break;
@@ -260,7 +263,9 @@ public class Enemy : MonoBehaviour
 	{
 		anim.SetFloat ("VelX", temp);
 		anim.SetTrigger("Run");
-		selectSprawl = 0;
+		anda = true;
+		sprawl = false;
+		selectSprawl = 1;
 		escolha = 0;
 		if(para)
 		{
