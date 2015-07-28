@@ -244,6 +244,7 @@ public class Enemy : MonoBehaviour
 	void ReCombat()
 	{
 		anim.SetTrigger("Run");
+		anim.SetInteger ("VelX", 0);
 		escolha = 0;
 		if(para)
 		{

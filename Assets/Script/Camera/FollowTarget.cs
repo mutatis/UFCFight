@@ -40,7 +40,6 @@ public class FollowTarget : MonoBehaviour
     private float xPosition; //wanted X position
     private float yPosition; //wanted Y position
     private Vector3 velocity = Vector3.zero; //A reference value used by SmoothDamp that tracks this object velocity
-	public bool segui;
 	
     /// <summary>
     /// SmoothDamp is used in FixedUpdate to avoid glitchs caused by non-linear equation
