@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
 	int selectSprawl;
 
-	float dist;
+	float dist;	
 	float temp;
 
 	bool anda;
