@@ -77,11 +77,6 @@ public class Enemy : MonoBehaviour
 			rig.velocity = new Vector2(0, 0);
 		}
 
-		if(life <= 0)
-		{
-			Kill();
-		}
-
 		if(escolha == 0)
 		{
 
@@ -267,11 +262,14 @@ public class Enemy : MonoBehaviour
 		StartCoroutine("SelectAttack");
 	}
 
-	void Kill()
+	public void Kill()
 	{
-		fight = false;
-		MovmentPlayer.player.ReturnPlayerMov ();
-		Destroy (gameObject);
+		if(life <= 0)
+		{
+			fight = false;
+			MovmentPlayer.player.ReturnPlayerMov ();
+			Destroy (gameObject);
+		}
 	}
 
 	void Combat()
