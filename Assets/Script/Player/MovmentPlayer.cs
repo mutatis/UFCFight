@@ -9,6 +9,9 @@ public class MovmentPlayer : MonoBehaviour
 
 	public Rigidbody2D rig;
 
+	[HideInInspector]
+	public GameObject obj;
+
 	public bool stop;
 	public bool fight;
 	public bool prepareAttack;
@@ -19,8 +22,6 @@ public class MovmentPlayer : MonoBehaviour
 	public float velX = 3;
 
 	float temp;
-
-	GameObject obj;
 
 	Enemy enemy;
 
@@ -192,20 +193,5 @@ public class MovmentPlayer : MonoBehaviour
 		velX = temp;
 		anim.SetFloat ("VelX", velX);
 		esquiva = false;
-	}
-
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		if(collision.gameObject.tag == "Enemy")
-		{
-			obj = collision.gameObject;
-		}
-	}
-	void OnTriggerExit2D(Collider2D collision)
-	{
-		if(collision.gameObject.tag == "Enemy")
-		{
-			obj = null;
-		}
 	}
 }

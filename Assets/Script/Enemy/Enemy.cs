@@ -19,9 +19,10 @@ public class Enemy : MonoBehaviour
 	[HideInInspector]
 	public int selectAttack;
 
-	MovmentPlayer player;
+	[HideInInspector]
+	public GameObject obj;
 
-	GameObject obj;
+	MovmentPlayer player;
 
 	int selectSprawl;
 
@@ -54,6 +55,17 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
+
+		if(dist <= (distanciaSD + 0.5f))
+		{
+			obj = MovmentPlayer.player.gameObject;
+			MovmentPlayer.player.obj = gameObject;
+		}
+		else
+		{
+			obj = null;
+			MovmentPlayer.player.obj = null;
+		}
 	
 		if(rig.velocity.x > 0)
 		{
@@ -280,20 +292,5 @@ public class Enemy : MonoBehaviour
 			para = false;
 		}
 		fight = false;
-	}
-
-	void OnTriggerEnter2D(Collider2D collision)
-	{
-		if(collision.gameObject.tag == "Player")
-		{
-			obj = collision.gameObject;
-		}
-	}
-	void OnTriggerExit2D(Collider2D collision)
-	{
-		if(collision.gameObject.tag == "Player")
-		{
-			obj = null;
-		}
 	}
 }
