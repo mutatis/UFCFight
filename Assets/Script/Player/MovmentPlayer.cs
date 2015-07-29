@@ -9,6 +9,7 @@ public class MovmentPlayer : MonoBehaviour
 
 	public Rigidbody2D rig;
 
+	[HideInInspector]
 	public GameObject obj;
 
 	public bool stop;

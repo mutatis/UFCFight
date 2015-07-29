@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
 	float dist;	
 	float temp;
 
+	bool primeiro;
 	bool anda;
 	bool fight;
 	bool sprawl;
@@ -203,7 +204,14 @@ public class Enemy : MonoBehaviour
 
 	IEnumerator SelectAttack()
 	{
-		yield return new WaitForSeconds (1);
+		if(!primeiro)
+		{
+			primeiro = true;
+		}
+		else
+		{
+			yield return new WaitForSeconds (1);
+		}
 		if(obj != null)
 		{
 			player = obj.GetComponent<MovmentPlayer> ();
