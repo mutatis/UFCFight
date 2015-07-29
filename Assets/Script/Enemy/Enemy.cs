@@ -111,6 +111,7 @@ public class Enemy : MonoBehaviour
 						}
 						else
 						{
+							MovmentPlayer.player.Esquivei();
 							anim.SetTrigger("Idle");
 							Combat();
 							sprawl = true;
