@@ -268,6 +268,7 @@ public class Enemy : MonoBehaviour
 		{
 			fight = false;
 			MovmentPlayer.player.ReturnPlayerMov ();
+			GameMaster.master.vitorias += 1;
 			Destroy (gameObject);
 		}
 	}
