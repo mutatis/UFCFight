@@ -15,18 +15,19 @@ public class Enemy : MonoBehaviour
 
 	public int escolha;
 	public int life;
-
-	[HideInInspector]
+    
 	public int selectAttack;
 
 	public GameObject obj;
 
 	MovmentPlayer player;
 
-	int selectSprawl;
+	public int selectSprawl;
 
 	float dist;	
 	float temp;
+
+    int cont;
 
 	bool primeiro;
 	bool anda;
@@ -43,7 +44,7 @@ public class Enemy : MonoBehaviour
 		escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
-			selectSprawl = Random.Range(0, 4);
+			selectSprawl = Random.Range(0, 3);
 		}
 		else
 		{
@@ -65,13 +66,21 @@ public class Enemy : MonoBehaviour
                 int prob = Random.Range(0, 10);
                 if (prob == 3)
                 {
-                    selectAttack = 1;
+                   selectAttack = 1;
                     Attack();
                     anim.SetTrigger("Attack");
                     intervalo = true;
                 }
                 atacatroll = false;
             }
+        }
+
+        if(cont >= 1 && dist >= distanciaSD)
+        {
+            velX = temp;
+            anim.SetFloat("VelX", 1);
+            anim.SetTrigger("Run");
+            transform.Translate(velX * Time.deltaTime, 0, 0);
         }
 
 		if(dist <= (distanciaSD + 0.5f))
@@ -170,23 +179,17 @@ public class Enemy : MonoBehaviour
                         fight = true;
                         velX = temp;
                         transform.Translate(velX * Time.deltaTime, 0, 0);
-                        anim.SetFloat("VelX", velX);
+                        anim.SetFloat("VelX", 1);
                         anim.SetTrigger("Run");
                     }
                     else if (dist <= distanciaSD)
                     {
-                        if (!MovmentPlayer.player.esquiva)
-                        {
-                            Attack();
-                        }
-                        else
-                        {
-                            MovmentPlayer.player.Esquivei();
-                            anim.SetTrigger("Idle");
-                            Combat();
-                            sprawl = true;
-                            velX = 0;
-                        }
+                        MovmentPlayer.player.Esquivei();
+                        anim.SetTrigger("Run");
+                        Combat();
+                        sprawl = true;
+                        velX = 0;
+                        
                     }
                     else
                     {
@@ -337,6 +340,7 @@ public class Enemy : MonoBehaviour
 
 	void Combat()
 	{
+        cont++;
 		escolha = 1;
 		if(!para)
 		{
