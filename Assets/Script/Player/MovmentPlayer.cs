@@ -25,6 +25,7 @@ public class MovmentPlayer : MonoBehaviour
 
 	Enemy enemy;
 
+    bool isAttack = true;
 	bool attackPower;
 	bool attack;
 
@@ -70,13 +71,15 @@ public class MovmentPlayer : MonoBehaviour
 		}
 		else if(Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
 		{
-			prepareAttack = true;
+            isAttack = false;
+            prepareAttack = true;
 			stop = true;
 			StartCoroutine("HeavyAttack");
 		}
 		else if(Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
-		{
-			prepareAttack = false;
+        {
+            isAttack = false;
+            prepareAttack = false;
 			if(!fight)
 			{
 				stop = false;
@@ -179,12 +182,14 @@ public class MovmentPlayer : MonoBehaviour
 	}
 
 	public void StopHeavyAttack()
-	{
-		attackPower = false;
+    {
+        isAttack = true;
+        attackPower = false;
 	}
 
 	public void StopAttack()
 	{
+        isAttack = true;
 		attack = false;
 	}
 

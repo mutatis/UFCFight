@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
 	bool sprawl;
 	bool para;
 	bool intervalo;
+    bool atacatroll;
 
 	void Start()
 	{
@@ -54,6 +55,24 @@ public class Enemy : MonoBehaviour
 	void Update()
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
+
+        if(selectAttack == 2)
+        {
+            if (player.prepareAttack == true)
+            {
+                //escolhe o ataque
+                atacatroll = true;
+                int prob = Random.Range(0, 10);
+                if (prob == 3)
+                {
+                    selectAttack = 1;
+                    Attack();
+                    anim.SetTrigger("Attack");
+                    intervalo = true;
+                }
+                atacatroll = false;
+            }
+        }
 
 		if(dist <= (distanciaSD + 0.5f))
 		{
@@ -257,19 +276,8 @@ public class Enemy : MonoBehaviour
 				player = obj.GetComponent<MovmentPlayer> ();
 			}
 			intervalo = false;
-			if(player.prepareAttack == true)
-			{
-                //escolhe o ataque
-                int prob = Random.Range(0, 4);
-                if(prob == 3)
-                {
-                    selectAttack = 1;
-                } 
-			}
-            else
-            {
-                selectAttack = Random.Range(0, 3);
-            }
+
+            selectAttack = Random.Range(0, 3);
 
 			switch(selectAttack)
 			{
