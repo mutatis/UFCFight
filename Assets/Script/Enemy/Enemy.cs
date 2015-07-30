@@ -42,8 +42,7 @@ public class Enemy : MonoBehaviour
 		escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
-			selectSprawl = 0;
-				//Random.Range(0, 4);
+			selectSprawl = Random.Range(0, 4);
 		}
 		else
 		{
@@ -101,7 +100,7 @@ public class Enemy : MonoBehaviour
 					{
 						if(!MovmentPlayer.player.esquiva)
 						{
-							Attack();
+							Sprawl();
 						}
 						else
 						{
@@ -140,8 +139,44 @@ public class Enemy : MonoBehaviour
 				break;
 
 				case 2:
-				//fake sprawl;
-				break;
+                    //fake sprawl;
+                    if (dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
+                    {
+                        velX = 0;
+                        anim.SetFloat("VelX", velX);
+                        anim.SetTrigger("Idle");
+                    }
+                    else if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+                    {
+                        fight = true;
+                        velX = temp;
+                        transform.Translate(velX * Time.deltaTime, 0, 0);
+                        anim.SetFloat("VelX", velX);
+                        anim.SetTrigger("Run");
+                    }
+                    else if (dist <= distanciaSD)
+                    {
+                        if (!MovmentPlayer.player.esquiva)
+                        {
+                            Attack();
+                        }
+                        else
+                        {
+                            MovmentPlayer.player.Esquivei();
+                            anim.SetTrigger("Idle");
+                            Combat();
+                            sprawl = true;
+                            velX = 0;
+                        }
+                    }
+                    else
+                    {
+                        velX = temp;
+                        anim.SetFloat("VelX", temp);
+                        anim.SetTrigger("Run");
+                        transform.Translate(velX * Time.deltaTime, 0, 0);
+                    }
+                    break;
 
 				default:
 				//sei la
@@ -181,6 +216,11 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+    void Sprawl()
+    {
+        MovmentPlayer.player.life = 0;
+    }
+
 	public void Dano()
 	{
 		anim.SetTrigger("Dano");
@@ -193,72 +233,87 @@ public class Enemy : MonoBehaviour
 	public void Attack()
 	{
 		ReCombat ();
-		MovmentPlayer.player.life -= 1;
-		MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
+		if(obj != null)
+		{
+			MovmentPlayer.player.life -= 1;
+			MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
+		}
 	}
 
 	IEnumerator SelectAttack()
 	{
-		if(!primeiro)
+		if(velX == 0)
 		{
-			primeiro = true;
+			if(!primeiro)
+			{
+				primeiro = true;
+			}
+			else
+			{
+				yield return new WaitForSeconds (1);
+			}
+			if(obj != null)
+			{
+				player = obj.GetComponent<MovmentPlayer> ();
+			}
+			intervalo = false;
+			if(player.prepareAttack == true)
+			{
+                //escolhe o ataque
+                int prob = Random.Range(0, 4);
+                if(prob == 3)
+                {
+                    selectAttack = 1;
+                } 
+			}
+            else
+            {
+                selectAttack = Random.Range(0, 3);
+            }
+
+			switch(selectAttack)
+			{
+				case 0:
+					if(dist <= distanciaSD && !fight)
+					{
+						velX = 0;
+						anim.SetFloat("VelX", velX);
+						anim.SetTrigger("Idle");
+						Combat ();
+					}
+					
+					if(dist > distanciaSD && !fight)
+					{
+						velX = temp;
+						transform.Translate(velX * Time.deltaTime, 0, 0);
+					}
+					else
+					{
+						velX = 0;
+					}
+				break;
+					
+				case 1:
+					if(!intervalo)
+					{
+						anim.SetTrigger("PAttack");
+						yield return new WaitForSeconds(1f);
+						Attack ();
+						anim.SetTrigger("Attack");
+						intervalo = true;
+					}
+				break;
+					
+				case 2:
+					if(!intervalo)
+					{
+						anim.SetTrigger("Defesa");
+						intervalo = true;
+					}
+				break;
+			}
+			StartCoroutine("SelectAttack");
 		}
-		else
-		{
-			yield return new WaitForSeconds (1);
-		}
-		if(obj != null)
-		{
-			player = obj.GetComponent<MovmentPlayer> ();
-		}
-		intervalo = false;
-//		if(player.prepareAttack == true)
-	//	{
-	//		//escolhe o ataque 
-	//	}
-		selectAttack = Random.Range (0, 3);
-		switch(selectAttack)
-		{
-			case 0:
-				if(dist <= distanciaSD && !fight)
-				{
-					velX = 0;
-					anim.SetFloat("VelX", velX);
-					anim.SetTrigger("Idle");
-					Combat ();
-				}
-				
-				if(dist > distanciaSD && !fight)
-				{
-					velX = temp;
-					transform.Translate(velX * Time.deltaTime, 0, 0);
-				}
-				else
-				{
-					velX = 0;
-				}
-			break;
-				
-			case 1:
-				if(!intervalo)
-				{
-					anim.SetTrigger("PAttack");
-					yield return new WaitForSeconds(1f);
-					Attack ();
-					anim.SetTrigger("Attack");
-					intervalo = true;
-				}
-			break;
-				
-			case 2:
-				if(!intervalo)
-				{
-					anim.SetTrigger("Defesa");
-					intervalo = true;
-				}
-			break;
-		}
-		StartCoroutine("SelectAttack");
 	}
 
 	public void Kill()
