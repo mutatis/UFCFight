@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
 	[HideInInspector]
 	public int selectAttack;
 
-	[HideInInspector]
 	public GameObject obj;
 
 	MovmentPlayer player;
@@ -301,4 +300,4 @@ public class Enemy : MonoBehaviour
 		}
 		fight = false;
 	}
-}
+}	
