@@ -26,8 +26,10 @@ public class Enemy : MonoBehaviour
 
 	float dist;	
 	float temp;
+    float distTemp;
 
     int cont;
+    public int random;
 
 	bool primeiro;
 	bool anda;
@@ -41,10 +43,12 @@ public class Enemy : MonoBehaviour
 	{
 		temp = velX;
 		anim.SetFloat ("VelX", velX);
-		escolha = Random.Range (0, 2);
+        escolha = 0;
+            //Random.Range (0, 2);
 		if(escolha == 0)
 		{
-			selectSprawl = Random.Range(0, 3);
+            selectSprawl = 2;
+                //Random.Range(0, 3);
 		}
 		else
 		{
@@ -173,35 +177,63 @@ public class Enemy : MonoBehaviour
 
 				case 2:
                     //fake sprawl;
-                    if (dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
+                    //prepara o takedown;
+                    if (dist > (distanciaSprawl - 1.5f) && dist < (distanciaSprawl + 1.5f))
                     {
                         velX = 0;
                         anim.SetFloat("VelX", 0);
                         anim.SetTrigger("Idle");
                     }
-                    else if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+                    else if(dist < (distanciaSprawl - 1.5f) && random == 0)
                     {
-                        fight = true;
-                        velX = temp;
-                        transform.Translate(velX * Time.deltaTime, 0, 0);
-                        anim.SetFloat("VelX", velX);
-                        anim.SetTrigger("Run");
+                        random = 2;
+                            //Random.Range(1, 4);
                     }
-                    else if (dist <= distanciaSD)
+                    if (random == 1)
                     {
-                        MovmentPlayer.player.Esquivei();
-                        anim.SetTrigger("Run");
-                        Combat();
-                        sprawl = true;
-                        velX = 0;
-                        
+                        //anda normal
+                        if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+                        {
+                            fight = true;
+                            velX = temp;
+                            transform.Translate(velX * Time.deltaTime, 0, 0);
+                            anim.SetFloat("VelX", velX);
+                            anim.SetTrigger("Run");
+                        }
+                        //para;
+                        else if (dist <= distanciaSD)
+                        {
+                            MovmentPlayer.player.Esquivei();
+                            anim.SetTrigger("Run");
+                            Combat();
+                            sprawl = true;
+                            velX = 0;
+
+                        }
+                        else
+                        {
+                            velX = temp;
+                            anim.SetFloat("VelX", temp);
+                            anim.SetTrigger("Run");
+                            transform.Translate(velX * Time.deltaTime, 0, 0);
+                        }
                     }
-                    else
+                    else if (random == 2)
                     {
-                        velX = temp;
-                        anim.SetFloat("VelX", temp);
-                        anim.SetTrigger("Run");
-                        transform.Translate(velX * Time.deltaTime, 0, 0);
+                        if (dist > (distanciaSprawl - 1.5f) && dist < (distanciaSprawl + 1.5f))
+                        {
+                            velX = 0;
+                            anim.SetFloat("VelX", 0);
+                            anim.SetTrigger("Idle");
+                        }
+                        else
+                        {
+                            random = Random.Range(1, 4);
+                        }
+                    }
+                    else if(random == 3)
+                    {
+                        selectSprawl = 0;
                     }
                     break;
 
