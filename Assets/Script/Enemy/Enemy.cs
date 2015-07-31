@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
         if(cont >= 1 && dist >= distanciaSD)
         {
             velX = temp;
-            anim.SetFloat("VelX", 1);
+            anim.SetFloat("VelX", temp);
             anim.SetTrigger("Run");
             transform.Translate(velX * Time.deltaTime, 0, 0);
         }
@@ -133,7 +133,8 @@ public class Enemy : MonoBehaviour
 						else
 						{
 							MovmentPlayer.player.Esquivei();
-							anim.SetTrigger("Idle");
+                            anim.SetFloat("VelX", 0);
+                            anim.SetTrigger("Idle");
 							Combat();
 							sprawl = true;
 							velX = 0;
@@ -171,7 +172,7 @@ public class Enemy : MonoBehaviour
                     if (dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
                     {
                         velX = 0;
-                        anim.SetFloat("VelX", velX);
+                        anim.SetFloat("VelX", 0);
                         anim.SetTrigger("Idle");
                     }
                     else if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
@@ -179,7 +180,7 @@ public class Enemy : MonoBehaviour
                         fight = true;
                         velX = temp;
                         transform.Translate(velX * Time.deltaTime, 0, 0);
-                        anim.SetFloat("VelX", 1);
+                        anim.SetFloat("VelX", velX);
                         anim.SetTrigger("Run");
                     }
                     else if (dist <= distanciaSD)
