@@ -160,11 +160,18 @@ public class MovmentPlayer : MonoBehaviour
 		if(obj != null)
 		{
 			enemy = obj.GetComponent<Enemy> ();
-			if(enemy.selectAttack == 2)
+            //se der soco forte e nao esta defendendo, da  dano normal;
+			if(enemy.selectAttack == 1)
 			{
 				enemy.Dano();
 				enemy.life -= 4;
 			}
+            //se der soco forte com a defesa, dano reduzido mas da stun;
+            else if(enemy.selectAttack == 2)
+            {
+                enemy.Stun();
+                enemy.life -= 1;
+            }
 		}
 	}
 

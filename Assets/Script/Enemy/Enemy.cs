@@ -14,9 +14,8 @@ public class Enemy : MonoBehaviour
 	public float distFight;
 
 	public int escolha;
-	public int life;
-    
-	public int selectAttack;
+	public int life;    
+	public int selectAttack = 1;
 
 	public GameObject obj;
 
@@ -43,12 +42,10 @@ public class Enemy : MonoBehaviour
 	{
 		temp = velX;
 		anim.SetFloat ("VelX", velX);
-        escolha = 0;
-            //Random.Range (0, 2);
+        escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
-            selectSprawl = 2;
-                //Random.Range(0, 3);
+            selectSprawl = Random.Range(0, 3);
 		}
 		else
 		{
@@ -274,6 +271,14 @@ public class Enemy : MonoBehaviour
 			velX = 0;
 		}
 	}
+
+    public void Stun()
+    {
+        anim.SetTrigger("Dano");
+        StopCoroutine("SelectAttack");
+        StartCoroutine("SelectAttack");
+        ReCombat();
+    }
 
     void Sprawl()
     {
