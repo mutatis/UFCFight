@@ -254,7 +254,7 @@ public class Enemy : MonoBehaviour
 		StopCoroutine("SelectAttack");
 		StartCoroutine ("SelectAttack");
 		ReCombat ();
-		rig.velocity = new Vector2 (4, 0);
+		rig.velocity = new Vector2 (6, 0);
 	}
 
 	public void Attack()
