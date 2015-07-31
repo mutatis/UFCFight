@@ -82,6 +82,10 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("Run");
             transform.Translate(velX * Time.deltaTime, 0, 0);
         }
+        else
+        {
+            anim.SetFloat("VelX", 0);
+        }
 
 		if(dist <= (distanciaSD + 0.5f))
 		{
@@ -113,7 +117,7 @@ public class Enemy : MonoBehaviour
 					if(dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
 					{
 						velX = 0;
-						anim.SetFloat("VelX", velX);
+						anim.SetFloat("VelX", 0);
 						anim.SetTrigger("Idle");
 					}
 					else if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
@@ -215,7 +219,7 @@ public class Enemy : MonoBehaviour
 					if(dist <= distanciaSD && !fight)
 					{
 						velX = 0;
-						anim.SetFloat("VelX", velX);
+						anim.SetFloat("VelX", 0);
 						anim.SetTrigger("Idle");
 						Combat ();
 					}
@@ -289,7 +293,7 @@ public class Enemy : MonoBehaviour
 					if(dist <= distanciaSD && !fight)
 					{
 						velX = 0;
-						anim.SetFloat("VelX", velX);
+						anim.SetFloat("VelX", 0);
 						anim.SetTrigger("Idle");
 						Combat ();
 					}
@@ -354,8 +358,8 @@ public class Enemy : MonoBehaviour
 
 	void ReCombat()
 	{
-		anim.SetFloat ("VelX", temp);
-		anim.SetTrigger("Run");
+		//anim.SetFloat ("VelX", temp);
+		//anim.SetTrigger("Run");
 		anda = true;
 		sprawl = false;
 		selectSprawl = 1;
