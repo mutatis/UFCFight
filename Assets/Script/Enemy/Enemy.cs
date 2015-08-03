@@ -183,8 +183,7 @@ public class Enemy : MonoBehaviour
                     }
                     else if(dist < (distanciaSprawl - 1.5f) && random == 0)
                     {
-                        random = 2;
-                            //Random.Range(1, 4);
+                        random = Random.Range(1, 4);
                     }
                     if (random == 1)
                     {
