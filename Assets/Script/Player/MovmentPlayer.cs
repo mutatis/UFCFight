@@ -202,7 +202,7 @@ public class MovmentPlayer : MonoBehaviour
 	{
         yield return new WaitForSeconds(0.2f);
         anim.SetTrigger("Carrega");
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (0.8f);
 		prepareAttack = false;
 		attackPower = true;
 	}
