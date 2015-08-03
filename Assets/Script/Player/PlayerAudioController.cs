@@ -6,6 +6,7 @@ public class PlayerAudioController : MonoBehaviour
     public AudioClip soco;
     public AudioClip socoF;
     public AudioClip carrega;
+    public AudioClip sprawl;
 
     bool isCarrega;
 
@@ -23,13 +24,22 @@ public class PlayerAudioController : MonoBehaviour
         isCarrega = false;
     }
     
-    //som quandoc arrega soco forte
+    //som quando carrega soco forte
     public void Carrega()
     {
         if(!isCarrega)
         {
             AudioSource.PlayClipAtPoint(carrega, transform.position, 1f);
             isCarrega = true;
+        }
+    }
+
+    //som do sprawl
+    public void Sprawl()
+    {
+        if (MovmentPlayer.player.esquiva)
+        {
+            AudioSource.PlayClipAtPoint(sprawl, transform.position, 1f);
         }
     }
 }

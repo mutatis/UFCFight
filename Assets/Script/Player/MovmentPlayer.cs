@@ -9,7 +9,7 @@ public class MovmentPlayer : MonoBehaviour
 
 	public Rigidbody2D rig;
 
-    public AudioSource audio;
+    public AudioSource audios;
 
 	[HideInInspector]
 	public GameObject obj;
@@ -44,13 +44,13 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Update ()
 	{
-        if(velX > 0 && !audio.isPlaying)
+        if(velX > 0 && !audios.isPlaying)
         {
-            audio.Play();
+            audios.Play();
         }
         else if(velX == 0)
         {
-            audio.Stop();
+            audios.Stop();
         }
 
 		if(rig.velocity.x < 0)
