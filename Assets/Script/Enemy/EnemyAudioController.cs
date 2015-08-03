@@ -7,6 +7,7 @@ public class EnemyAudioController : MonoBehaviour
 
     bool tocaT;
 
+    //som de takeDown so toca 1 vez mas a animacao toca varias vezes por isso o bool
     public void Takedown()
     {
         if (!tocaT)

@@ -200,6 +200,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	IEnumerator HeavyAttack()
 	{
+        yield return new WaitForSeconds(0.2f);
+        anim.SetTrigger("Carrega");
 		yield return new WaitForSeconds (1);
 		prepareAttack = false;
 		attackPower = true;
