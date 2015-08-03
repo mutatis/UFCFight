@@ -104,6 +104,7 @@ public class MovmentPlayer : MonoBehaviour
 			}
 			else if(attackPower)
 			{
+                print("Fodase");
 				AttackF();
 				anim.SetTrigger("HeavyAttack");
 				StopCoroutine ("HeavyAttack");
@@ -171,6 +172,11 @@ public class MovmentPlayer : MonoBehaviour
             {
                 enemy.Stun();
                 enemy.life -= 1;
+            }
+            else
+            {
+                enemy.Stun();
+                enemy.life -=4;
             }
 		}
 	}
