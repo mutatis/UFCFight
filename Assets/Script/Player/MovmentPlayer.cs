@@ -148,7 +148,7 @@ public class MovmentPlayer : MonoBehaviour
 		if(obj != null)
 		{
 			enemy = obj.GetComponent<Enemy> ();
-			if(enemy.selectAttack == 1)
+			if(enemy.selectAttack != 2)
 			{
 				enemy.Dano();
 				enemy.life -= 2;
