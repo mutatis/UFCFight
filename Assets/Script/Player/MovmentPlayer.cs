@@ -9,6 +9,8 @@ public class MovmentPlayer : MonoBehaviour
 
 	public Rigidbody2D rig;
 
+    public AudioSource audio;
+
 	[HideInInspector]
 	public GameObject obj;
 
@@ -42,6 +44,15 @@ public class MovmentPlayer : MonoBehaviour
 
 	void Update ()
 	{
+        if(velX > 0 && !audio.isPlaying)
+        {
+            audio.Play();
+        }
+        else if(velX == 0)
+        {
+            audio.Stop();
+        }
+
 		if(rig.velocity.x < 0)
 		{
 			rig.velocity = new Vector2((rig.velocity.x + 0.05f), 0);
