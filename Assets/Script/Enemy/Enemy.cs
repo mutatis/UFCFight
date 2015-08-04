@@ -92,14 +92,14 @@ public class Enemy : MonoBehaviour
 		{
 			obj = MovmentPlayer.player.gameObject;
 			MovmentPlayer.player.obj = gameObject;
-		}
-		else
-		{
-			obj = null;
-			MovmentPlayer.player.obj = null;
-		}
-	
-		if(rig.velocity.x > 0)
+        }
+        else if (cont > 0)
+        {
+            obj = null;
+            MovmentPlayer.player.obj = null;
+        }
+
+        if (rig.velocity.x > 0)
 		{
 			rig.velocity = new Vector2((rig.velocity.x - 0.05f), 0);
 		}

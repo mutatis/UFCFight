@@ -5,11 +5,13 @@ public class PlayerAudioController : MonoBehaviour
 {
     public AudioSource audios;
 
+    public GameObject carrega;
+
     public AudioClip[] socoVento;
     public AudioClip[] soco;
 
     public AudioClip socoF;
-    public AudioClip carrega;
+    public AudioClip blockEnemy;
     public AudioClip sprawl;
     public AudioClip esquiva;
 
@@ -31,6 +33,17 @@ public class PlayerAudioController : MonoBehaviour
             AudioSource.PlayClipAtPoint(esquiva, transform.position, 1f);
             MovmentPlayer.player.isEsquiva = false;
         }
+
+        if(Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Carrega"));
+        }
+    }
+
+    //inimigo defendeu
+    public void BlockEnemy()
+    {
+        AudioSource.PlayClipAtPoint(blockEnemy, transform.position, 1f);
     }
 
     //som de soco
@@ -59,7 +72,7 @@ public class PlayerAudioController : MonoBehaviour
     {
         if(!isCarrega)
         {
-            AudioSource.PlayClipAtPoint(carrega, transform.position, 1f);
+            Instantiate(carrega);
             isCarrega = true;
         }
     }

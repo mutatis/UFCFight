@@ -82,12 +82,15 @@ public class MovmentPlayer : MonoBehaviour
             }
             else if (Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
             {
-                audioController.Soco();
                 isAttack = false;
                 prepareAttack = false;
                 if (!fight)
                 {
                     stop = false;
+                }
+                if(obj == null)
+                {
+                    audioController.Soco();
                 }
                 Attack();
                 anim.SetTrigger("Attack");
@@ -154,10 +157,15 @@ public class MovmentPlayer : MonoBehaviour
 		{
 			enemy = obj.GetComponent<Enemy> ();
 			if(enemy.selectAttack != 2)
-			{
-				enemy.Dano();
+            {
+                audioController.Soco();
+                enemy.Dano();
 				enemy.life -= 2;
 			}
+            else if(enemy.selectAttack == 2)
+            {
+                audioController.BlockEnemy();
+            }
 		}
 	}
 
