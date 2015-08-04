@@ -386,6 +386,7 @@ public class Enemy : MonoBehaviour
 		escolha = 1;
 		if(!para)
 		{
+            primeiro = false;
 			StartCoroutine("SelectAttack");
 			MovmentPlayer.player.StopPlayer ();
 			para = true;
