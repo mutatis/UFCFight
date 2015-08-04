@@ -112,10 +112,9 @@ public class MovmentPlayer : MonoBehaviour
 			if(!fight)
 			{
 				stop = false;
-			}
-			else if(attackPower)
+            }
+			if(attackPower)
 			{
-                print("Fodase");
 				AttackF();
 				anim.SetTrigger("HeavyAttack");
 				StopCoroutine ("HeavyAttack");
