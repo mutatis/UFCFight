@@ -137,6 +137,7 @@ public class Enemy : MonoBehaviour
 						}
 						else
 						{
+                            MovmentPlayer.player.isEsquiva = true;
 							MovmentPlayer.player.Esquivei();
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
