@@ -36,7 +36,6 @@ public class PlayerAudioController : MonoBehaviour
     //som de soco
     public void Soco()
     {
-        print(MovmentPlayer.player.obj);
         if (MovmentPlayer.player.obj != null)
         {
             AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], transform.position, 1f);
