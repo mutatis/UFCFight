@@ -1,5 +1,4 @@
-﻿//
-// FollowPlayer.cs
+﻿// FollowPlayer.cs
 //
 // Author:
 //       Yves J. Albuquerque <yves.albuquerque@gmail.com>
