@@ -322,7 +322,7 @@ public class Enemy : MonoBehaviour
 			}
 			intervalo = false;
 
-            selectAttack = Random.Range(0, 5);
+            selectAttack = Random.Range(0, 4);
 
 			switch(selectAttack)
 			{
@@ -345,7 +345,8 @@ public class Enemy : MonoBehaviour
 					{
 						velX = 0;
 					}
-				break;
+                    StartCoroutine("SelectAttack");
+                    break;
 					
 				case 1:
                     //da soco
@@ -357,7 +358,8 @@ public class Enemy : MonoBehaviour
 						anim.SetTrigger("Attack");
 						intervalo = true;
 					}
-				break;
+                    StartCoroutine("SelectAttack");
+                    break;
 					
 				case 2:
                     //defende
@@ -366,11 +368,12 @@ public class Enemy : MonoBehaviour
 						anim.SetTrigger("Defesa");
 						intervalo = true;
 					}
-				break;
+                    StartCoroutine("SelectAttack");
+                    break;
 
-                case 4:
+                case 3:
                     //mid takedown
-                    rig.velocity = new Vector2(8, 0);
+                    rig.velocity = new Vector2(10, 0);
                     yield return new WaitForSeconds(0.5f);
                     escolha = 0;
                     anim.SetTrigger("Sprawl");
@@ -380,7 +383,7 @@ public class Enemy : MonoBehaviour
                     rig.velocity = new Vector2(0, 0);
                 break;
 			}
-			StartCoroutine("SelectAttack");
+			
 		}
 	}
 
