@@ -327,6 +327,7 @@ public class Enemy : MonoBehaviour
 			switch(selectAttack)
 			{
 				case 0:
+                    //nao faz nada
 					if(dist <= distanciaSD && !fight)
 					{
 						velX = 0;
@@ -347,6 +348,7 @@ public class Enemy : MonoBehaviour
 				break;
 					
 				case 1:
+                    //da soco
 					if(!intervalo)
 					{
 						anim.SetTrigger("PAttack");
@@ -358,6 +360,7 @@ public class Enemy : MonoBehaviour
 				break;
 					
 				case 2:
+                    //defende
 					if(!intervalo)
 					{
 						anim.SetTrigger("Defesa");
