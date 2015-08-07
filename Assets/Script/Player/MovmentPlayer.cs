@@ -77,7 +77,7 @@ public class MovmentPlayer : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
             {
                 prepareAttack = true;
-                stop = true;
+                
                 StartCoroutine("HeavyAttack");
             }
             else if (Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)

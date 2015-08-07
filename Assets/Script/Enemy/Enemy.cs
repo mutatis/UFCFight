@@ -95,6 +95,7 @@ public class Enemy : MonoBehaviour
         }
         else if (cont > 0)
         {
+            MovmentPlayer.player.ReturnPlayerMov();
             obj = null;
             MovmentPlayer.player.obj = null;
         }
@@ -114,7 +115,7 @@ public class Enemy : MonoBehaviour
 			switch(selectSprawl)
 			{
 				case 0:
-				//Vai da Sprawl;
+				//Vai da Takedown;
 					if(dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
 					{
 						velX = 0;
@@ -156,7 +157,7 @@ public class Enemy : MonoBehaviour
 				break;
 
 				case 1:
-				//Corre pra frente e ataca ao se aproxima sem da sprawl;
+				//Corre pra frente e ataca ao se aproxima sem da takedown;
 					if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
 					{
 						fight = true;
@@ -174,7 +175,7 @@ public class Enemy : MonoBehaviour
 				break;
 
 				case 2:
-                    //fake sprawl;
+                    //fake takedown;
                     //prepara o takedown;
                     if (dist > (distanciaSprawl - 1.5f) && dist < (distanciaSprawl + 1.5f))
                     {
@@ -375,12 +376,15 @@ public class Enemy : MonoBehaviour
                     //mid takedown
                     rig.velocity = new Vector2(10, 0);
                     yield return new WaitForSeconds(0.5f);
+                    rig.velocity = new Vector2(0, 0);
+                    sprawl = false;
                     escolha = 0;
                     anim.SetTrigger("Sprawl");
                     anim.SetFloat("VelX", 0);
                     cont = 0;
                     selectSprawl = 0;
-                    rig.velocity = new Vector2(0, 0);
+                    selectAttack = Random.Range(0, 4);
+                    StopCoroutine("SelectAttack");
                 break;
 			}
 			
