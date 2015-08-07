@@ -9,8 +9,9 @@ public class PlayerAudioController : MonoBehaviour
 
     public AudioClip[] socoVento;
     public AudioClip[] soco;
+    public AudioClip[] grito;
 
-    public AudioClip socoF;
+    public AudioClip chute;
     public AudioClip blockEnemy;
     public AudioClip sprawl;
     public AudioClip esquiva;
@@ -57,13 +58,14 @@ public class PlayerAudioController : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], transform.position, 1f);
         }
+        AudioSource.PlayClipAtPoint(grito[Random.Range(0, grito.Length)], transform.position, 0.5f);
         isCarrega = false;
     }
 
     //som de socoForte
     public void SocoForte()
     {
-        AudioSource.PlayClipAtPoint(socoF, transform.position, 1f);
+        AudioSource.PlayClipAtPoint(chute, transform.position, 1f);
         isCarrega = false;
     }
     
