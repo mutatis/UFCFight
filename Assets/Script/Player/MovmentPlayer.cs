@@ -24,8 +24,9 @@ public class MovmentPlayer : MonoBehaviour
 	public float velX = 3;
 
 	float temp;
+    float dist;
 
-	Enemy enemy;
+    Enemy enemy;
 
     bool isAttack = true;
 	bool attackPower;
@@ -42,19 +43,18 @@ public class MovmentPlayer : MonoBehaviour
 		anim.SetFloat ("VelX", velX);
 	}
 
-    float dist;
-
 	void Update ()
-	{
+	{/*
         if (obj != null)
         {
             dist = Vector3.Distance(transform.position, obj.transform.position);
             if(dist < 1.5f)
             {
+                obj.GetComponent<Enemy>().obj = null;
                 obj = null;
             }
         }
-
+        */
 		if(rig.velocity.x < 0)
 		{
 			rig.velocity = new Vector2((rig.velocity.x + 0.05f), 0);
@@ -87,8 +87,7 @@ public class MovmentPlayer : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
             {
-                prepareAttack = true;
-                
+                prepareAttack = true;                
                 StartCoroutine("HeavyAttack");
             }
             else if (Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)

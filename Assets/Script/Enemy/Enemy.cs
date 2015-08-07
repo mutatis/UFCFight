@@ -264,6 +264,15 @@ public class Enemy : MonoBehaviour
 						velX = 0;
 					}
 				break;
+                case 3:
+                    if (dist <= distanciaSD && !fight)
+                    {
+                        velX = 0;
+                        anim.SetFloat("VelX", 0);
+                        anim.SetTrigger("Idle");
+                        Combat();
+                    }
+                    break;
 			}
 		}
 
@@ -377,15 +386,16 @@ public class Enemy : MonoBehaviour
                     rig.velocity = new Vector2(10, 0);
                     yield return new WaitForSeconds(0.5f);
                     rig.velocity = new Vector2(0, 0);
-                    sprawl = false;
+                    //sprawl = false;
                     escolha = 0;
                     anim.SetTrigger("Sprawl");
                     anim.SetFloat("VelX", 0);
-                    cont = 0;
+                    //cont = 0;
+                    ReCombat();
                     selectSprawl = 0;
                     selectAttack = Random.Range(0, 4);
                     StopCoroutine("SelectAttack");
-                break;
+                    break;
 			}
 			
 		}
