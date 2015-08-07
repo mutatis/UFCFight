@@ -42,8 +42,19 @@ public class MovmentPlayer : MonoBehaviour
 		anim.SetFloat ("VelX", velX);
 	}
 
+    float dist;
+
 	void Update ()
 	{
+        if (obj != null)
+        {
+            dist = Vector3.Distance(transform.position, obj.transform.position);
+            if(dist < 1.5f)
+            {
+                obj = null;
+            }
+        }
+
 		if(rig.velocity.x < 0)
 		{
 			rig.velocity = new Vector2((rig.velocity.x + 0.05f), 0);

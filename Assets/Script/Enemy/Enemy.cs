@@ -95,9 +95,9 @@ public class Enemy : MonoBehaviour
         }
         else if (cont > 0)
         {
-            MovmentPlayer.player.ReturnPlayerMov();
             obj = null;
             MovmentPlayer.player.obj = null;
+            MovmentPlayer.player.ReturnPlayerMov();
         }
 
         if (rig.velocity.x > 0)
