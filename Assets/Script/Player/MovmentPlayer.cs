@@ -31,6 +31,7 @@ public class MovmentPlayer : MonoBehaviour
     bool isAttack = true;
 	bool attackPower;
 	bool attack;
+    bool dano = false;
 
 	void Awake()
 	{
@@ -76,59 +77,74 @@ public class MovmentPlayer : MonoBehaviour
 			transform.Translate(velX * Time.deltaTime, 0, 0);
 		}
 
-        if (isAttack)
+        if (!dano)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && !attack)
+            if (isAttack)
             {
-                isAttack = false;
-                Defesa();
-                anim.SetTrigger("Base");
-                esquiva = true;
+                if (Input.GetKeyDown(KeyCode.LeftArrow) && !attack)
+                {
+                    isAttack = false;
+                    Defesa();
+                    anim.SetTrigger("Base");
+                    esquiva = true;
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
+                {
+                    prepareAttack = true;
+                    StartCoroutine("HeavyAttack");
+                }
+                else if (Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
+                {
+                    isAttack = false;
+                    prepareAttack = false;
+                    if (!fight)
+                    {
+                        stop = false;
+                    }
+                    if (obj == null)
+                    {
+                        audioController.Soco();
+                    }
+                    Attack();
+                    anim.SetTrigger("Attack");
+                    attack = true;
+                    StopCoroutine("HeavyAttack");
+                }
+                /*else if(fight)
+		        {
+			        velX = temp / 2;
+			        anim.SetTrigger("Run");
+			        transform.Translate(velX * Time.deltaTime, 0, 0);
+		        }*/
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
+
+            if (Input.GetKeyUp(KeyCode.RightArrow))
             {
-                prepareAttack = true;                
-                StartCoroutine("HeavyAttack");
-            }
-            else if (Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
-            {
-                isAttack = false;
-                prepareAttack = false;
                 if (!fight)
                 {
                     stop = false;
                 }
-                if(obj == null)
+                if (attackPower)
                 {
-                    audioController.Soco();
+                    AttackF();
+                    anim.SetTrigger("HeavyAttack");
+                    StopCoroutine("HeavyAttack");
                 }
-                Attack();
-                anim.SetTrigger("Attack");
-                attack = true;
-                StopCoroutine("HeavyAttack");
             }
-            /*else if(fight)
-		    {
-			    velX = temp / 2;
-			    anim.SetTrigger("Run");
-			    transform.Translate(velX * Time.deltaTime, 0, 0);
-		    }*/
         }
-
-		if(Input.GetKeyUp(KeyCode.RightArrow))
-		{
-			if(!fight)
-			{
-				stop = false;
-            }
-			if(attackPower)
-			{
-				AttackF();
-				anim.SetTrigger("HeavyAttack");
-				StopCoroutine ("HeavyAttack");
-			}
-		}
 	}
+
+    public void Dano()
+    {
+        dano = true;
+        anim.SetTrigger("Dano");
+        life -= 1;
+    }
+
+    public void EndDano()
+    {
+        dano = false;
+    }
 
 	void Morreu()
 	{
