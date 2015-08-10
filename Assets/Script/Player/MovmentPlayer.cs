@@ -139,6 +139,7 @@ public class MovmentPlayer : MonoBehaviour
         dano = true;
         anim.SetTrigger("Dano");
         life -= 1;
+        StopHeavyAttack();
     }
 
     public void EndDano()
