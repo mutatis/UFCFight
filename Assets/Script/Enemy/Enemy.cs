@@ -58,6 +58,11 @@ public class Enemy : MonoBehaviour
 	{
 		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
 
+        if(life <= 0)
+        {
+            anim.SetBool("Kill", true);
+        }
+
         if(selectAttack == 2)
         {
             if (player.prepareAttack == true)
