@@ -315,6 +315,7 @@ public class Enemy : MonoBehaviour
 		if(obj != null)
 		{
             MovmentPlayer.player.anim.SetTrigger("Dano");
+            MovmentPlayer.player.isAttack = true;
 			MovmentPlayer.player.life -= 1;
 			MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
 		}

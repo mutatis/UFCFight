@@ -18,8 +18,9 @@ public class MovmentPlayer : MonoBehaviour
 	public bool fight;
 	public bool prepareAttack;
 	public bool esquiva;
+    public bool isAttack = true;
 
-	public int life;
+    public int life;
 
 	public float velX = 3;
 
@@ -28,7 +29,6 @@ public class MovmentPlayer : MonoBehaviour
 
     Enemy enemy;
 
-    bool isAttack = true;
 	bool attackPower;
 	bool attack;
 
@@ -129,6 +129,11 @@ public class MovmentPlayer : MonoBehaviour
 			}
 		}
 	}
+
+    public void StopDano()
+    {
+        isAttack = false;
+    }
 
 	void Morreu()
 	{
