@@ -314,7 +314,8 @@ public class Enemy : MonoBehaviour
 		ReCombat ();
 		if(obj != null)
 		{
-            MovmentPlayer.player.Dano();
+            MovmentPlayer.player.anim.SetTrigger("Dano");
+			MovmentPlayer.player.life -= 1;
 			MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
 		}
 	}
