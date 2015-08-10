@@ -95,13 +95,10 @@ public class Enemy : MonoBehaviour
 
 		if(dist <= (distanciaSD + 0.5f))
 		{
-		/*	obj = MovmentPlayer.player.gameObject;
-			MovmentPlayer.player.obj = gameObject;*/
+
         }
         else if (cont > 0)
-        {/*
-            obj = null;
-            MovmentPlayer.player.obj = null;*/
+        {
             MovmentPlayer.player.ReturnPlayerMov();
         }
 
