@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
 	bool para;
 	bool intervalo;
     bool atacatroll;
+    bool dano;
 
 	void Start()
 	{
@@ -111,104 +112,45 @@ public class Enemy : MonoBehaviour
 			rig.velocity = new Vector2(0, 0);
 		}
 
-		if(escolha == 0)
-		{
+        if (!dano)
+        {
+            if (escolha == 0)
+            {
 
-			switch(selectSprawl)
-			{
-				case 0:
-				//Vai da Takedown;
-					if(dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
-					{
-						velX = 0;
-						anim.SetFloat("VelX", 0);
-						anim.SetTrigger("Idle");
-					}
-					else if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
-					{
-						fight = true;
-						velX = temp;
-						transform.Translate((velX * 10) * Time.deltaTime, 0, 0);
-						anim.SetFloat("VelX", velX);
-						anim.SetTrigger("Sprawl");
-					}
-					else if(dist <= distanciaSD)
-					{
-						if(!MovmentPlayer.player.esquiva)
-						{
-							Sprawl();
-						}
-						else
-						{
-                            MovmentPlayer.player.isEsquiva = true;
-							MovmentPlayer.player.Esquivei();
+                switch (selectSprawl)
+                {
+                    case 0:
+                        //Vai da Takedown;
+                        if (dist > (distanciaSprawl - 1) && dist < (distanciaSprawl + 1))
+                        {
+                            velX = 0;
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
-							Combat();
-							sprawl = true;
-							velX = 0;
-						}
-					}
-					else
-					{
-						velX = temp;					
-						anim.SetFloat ("VelX", temp);
-						anim.SetTrigger("Run");
-						transform.Translate(velX * Time.deltaTime, 0, 0);
-					}
-				break;
-
-				case 1:
-				//Corre pra frente e ataca ao se aproxima sem da takedown;
-					if(dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
-					{
-						fight = true;
-						velX = temp;
-						transform.Translate(velX * Time.deltaTime, 0, 0);
-						anim.SetFloat("VelX", velX);
-						anim.SetTrigger("Run");
-					}
-					else if(dist <= distanciaSD)
-					{
-						Combat();
-						sprawl = true;
-						velX = 0;
-					}
-				break;
-
-				case 2:
-                    //fake takedown;
-                    //prepara o takedown;
-                    if (dist > (distanciaSprawl - 1.5f) && dist < (distanciaSprawl + 1.5f))
-                    {
-                        velX = 0;
-                        anim.SetFloat("VelX", 0);
-                        anim.SetTrigger("Idle");
-                    }
-                    else if(dist < (distanciaSprawl - 1.5f) && random == 0)
-                    {
-                        random = Random.Range(1, 4);
-                    }
-                    if (random == 1)
-                    {
-                        //anda normal
-                        if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+                        }
+                        else if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
                         {
                             fight = true;
                             velX = temp;
-                            transform.Translate(velX * Time.deltaTime, 0, 0);
+                            transform.Translate((velX * 10) * Time.deltaTime, 0, 0);
                             anim.SetFloat("VelX", velX);
-                            anim.SetTrigger("Run");
+                            anim.SetTrigger("Sprawl");
                         }
-                        //para;
                         else if (dist <= distanciaSD)
                         {
-                            MovmentPlayer.player.Esquivei();
-                            anim.SetTrigger("Run");
-                            Combat();
-                            sprawl = true;
-                            velX = 0;
-
+                            if (!MovmentPlayer.player.esquiva)
+                            {
+                                Sprawl();
+                            }
+                            else
+                            {
+                                MovmentPlayer.player.isEsquiva = true;
+                                MovmentPlayer.player.Esquivei();
+                                anim.SetFloat("VelX", 0);
+                                anim.SetTrigger("Idle");
+                                Combat();
+                                sprawl = true;
+                                velX = 0;
+                            }
                         }
                         else
                         {
@@ -217,66 +159,128 @@ public class Enemy : MonoBehaviour
                             anim.SetTrigger("Run");
                             transform.Translate(velX * Time.deltaTime, 0, 0);
                         }
-                    }
-                    else if (random == 2)
-                    {
+                        break;
+
+                    case 1:
+                        //Corre pra frente e ataca ao se aproxima sem da takedown;
+                        if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+                        {
+                            fight = true;
+                            velX = temp;
+                            transform.Translate(velX * Time.deltaTime, 0, 0);
+                            anim.SetFloat("VelX", velX);
+                            anim.SetTrigger("Run");
+                        }
+                        else if (dist <= distanciaSD)
+                        {
+                            Combat();
+                            sprawl = true;
+                            velX = 0;
+                        }
+                        break;
+
+                    case 2:
+                        //fake takedown;
+                        //prepara o takedown;
                         if (dist > (distanciaSprawl - 1.5f) && dist < (distanciaSprawl + 1.5f))
                         {
                             velX = 0;
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
                         }
-                        else
+                        else if (dist < (distanciaSprawl - 1.5f) && random == 0)
                         {
                             random = Random.Range(1, 4);
                         }
-                    }
-                    else if(random == 3)
-                    {
-                        selectSprawl = 0;
-                    }
-                    break;
+                        if (random == 1)
+                        {
+                            //anda normal
+                            if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+                            {
+                                fight = true;
+                                velX = temp;
+                                transform.Translate(velX * Time.deltaTime, 0, 0);
+                                anim.SetFloat("VelX", velX);
+                                anim.SetTrigger("Run");
+                            }
+                            //para;
+                            else if (dist <= distanciaSD)
+                            {
+                                MovmentPlayer.player.Esquivei();
+                                anim.SetTrigger("Run");
+                                Combat();
+                                sprawl = true;
+                                velX = 0;
 
-				default:
-				//sei la
-				break;
-			}
-		}
+                            }
+                            else
+                            {
+                                velX = temp;
+                                anim.SetFloat("VelX", temp);
+                                anim.SetTrigger("Run");
+                                transform.Translate(velX * Time.deltaTime, 0, 0);
+                            }
+                        }
+                        else if (random == 2)
+                        {
+                            if (dist > (distanciaSprawl - 1.5f) && dist < (distanciaSprawl + 1.5f))
+                            {
+                                velX = 0;
+                                anim.SetFloat("VelX", 0);
+                                anim.SetTrigger("Idle");
+                            }
+                            else
+                            {
+                                random = Random.Range(1, 4);
+                            }
+                        }
+                        else if (random == 3)
+                        {
+                            selectSprawl = 0;
+                        }
+                        break;
 
-		if(escolha == 1)
-		{
-			switch(selectAttack)
-			{
-				case 0:
-					if(dist <= distanciaSD && !fight)
-					{
-						velX = 0;
-						anim.SetFloat("VelX", 0);
-						anim.SetTrigger("Idle");
-						Combat ();
-					}
-					
-					if(dist > distanciaSD && !fight)
-					{
-						velX = temp;
-						transform.Translate(velX * Time.deltaTime, 0, 0);
-					}
-					else
-					{
-						velX = 0;
-					}
-				break;
-                case 3:
-                    if (dist <= distanciaSD && !fight)
-                    {
-                        velX = 0;
-                        anim.SetFloat("VelX", 0);
-                        anim.SetTrigger("Idle");
-                        Combat();
-                    }
-                    break;
-			}
-		}
+                    default:
+                        //sei la
+                        break;
+                }
+            }
+
+            if (escolha == 1)
+            {
+                switch (selectAttack)
+                {
+                    case 0:
+                        if (dist <= distanciaSD && !fight)
+                        {
+                            velX = 0;
+                            anim.SetFloat("VelX", 0);
+                            anim.SetTrigger("Idle");
+                            Combat();
+                        }
+
+                        if (dist > distanciaSD && !fight)
+                        {
+                            velX = temp;
+                            transform.Translate(velX * Time.deltaTime, 0, 0);
+                        }
+                        else
+                        {
+                            velX = 0;
+                        }
+                        break;
+                    case 3:
+                        if (dist <= distanciaSD && !fight)
+                        {
+                            velX = 0;
+                            anim.SetFloat("VelX", 0);
+                            anim.SetTrigger("Idle");
+                            Combat();
+                        }
+                        break;
+                }
+            }
+        }
 
 		if(fight)
 		{
@@ -312,7 +316,6 @@ public class Enemy : MonoBehaviour
 		ReCombat ();
 		if(obj != null)
 		{
-            MovmentPlayer.player.anim.SetTrigger("Dano");
             MovmentPlayer.player.isAttack = true;
 			MovmentPlayer.player.life -= 1;
 			MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
@@ -406,8 +409,14 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+    public void IDano()
+    {
+        dano = true;
+    }
+
 	public void Kill()
 	{
+        dano = false;
 		if(life <= 0)
 		{
 			fight = false;
@@ -415,6 +424,11 @@ public class Enemy : MonoBehaviour
 			GameMaster.master.vitorias += 1;
 			Destroy (gameObject);
 		}
+        else
+        {
+            escolha = 1;
+            selectSprawl = 1;
+        }
 	}
 
 	void Combat()
