@@ -243,4 +243,22 @@ public class MovmentPlayer : MonoBehaviour
 		anim.SetFloat ("VelX", velX);
 		esquiva = false;
 	}
+
+    void OnTriggerEnter2D (Collider2D other)
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            obj = other.gameObject;
+            other.gameObject.GetComponent<Enemy>().obj = gameObject;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            obj = null;
+            other.gameObject.GetComponent<Enemy>().obj = null;
+        }
+    }
 }

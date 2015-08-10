@@ -95,13 +95,13 @@ public class Enemy : MonoBehaviour
 
 		if(dist <= (distanciaSD + 0.5f))
 		{
-			obj = MovmentPlayer.player.gameObject;
-			MovmentPlayer.player.obj = gameObject;
+		/*	obj = MovmentPlayer.player.gameObject;
+			MovmentPlayer.player.obj = gameObject;*/
         }
         else if (cont > 0)
-        {
+        {/*
             obj = null;
-            MovmentPlayer.player.obj = null;
+            MovmentPlayer.player.obj = null;*/
             MovmentPlayer.player.ReturnPlayerMov();
         }
 
@@ -305,6 +305,7 @@ public class Enemy : MonoBehaviour
 		anim.SetTrigger("Dano");
 		StopCoroutine("SelectAttack");
 		StartCoroutine ("SelectAttack");
+        escolha = 1;
 		ReCombat ();
 		rig.velocity = new Vector2 (6, 0);
 	}
