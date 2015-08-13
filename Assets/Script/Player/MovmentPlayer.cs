@@ -256,7 +256,7 @@ public class MovmentPlayer : MonoBehaviour
 		esquiva = false;
 	}
 
-    void OnTriggerEnter2D (Collider2D other)
+    void OnCollisionEnter2D (Collision2D other)
     {
         if(other.gameObject.tag == "Enemy")
         {
@@ -265,7 +265,7 @@ public class MovmentPlayer : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
