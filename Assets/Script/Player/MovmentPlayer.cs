@@ -130,6 +130,18 @@ public class MovmentPlayer : MonoBehaviour
 		}
 	}
 
+    public void Dano()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine("Normal");
+    }
+
+    IEnumerator Normal()
+    {
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
     public void StopDano()
     {
         isAttack = false;
