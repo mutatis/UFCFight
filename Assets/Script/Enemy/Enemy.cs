@@ -403,7 +403,7 @@ public class Enemy : MonoBehaviour
                     //cont = 0;
                     ReCombat();
                     selectSprawl = 0;
-                    selectAttack = Random.Range(0, 4);
+                    selectAttack = 0;
                     StopCoroutine("SelectAttack");
                     break;
 			}

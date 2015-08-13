@@ -44,8 +44,8 @@ public class MovmentPlayer : MonoBehaviour
 	}
 
 	void Update ()
-	{/*
-        if (obj != null)
+	{
+        /*if (obj != null)
         {
             dist = Vector3.Distance(transform.position, obj.transform.position);
             if(dist < 1.5f)
@@ -53,9 +53,9 @@ public class MovmentPlayer : MonoBehaviour
                 obj.GetComponent<Enemy>().obj = null;
                 obj = null;
             }
-        }
-        */
-		if(rig.velocity.x < 0)
+        }*/
+
+        if (rig.velocity.x < 0)
 		{
 			rig.velocity = new Vector2((rig.velocity.x + 0.05f), 0);
 		}
