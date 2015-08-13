@@ -395,10 +395,10 @@ public class Enemy : MonoBehaviour
                     rig.velocity = new Vector2(10, 0);
                     yield return new WaitForSeconds(0.5f);
                     rig.velocity = new Vector2(0, 0);
-                    //sprawl = false;
+                    sprawl = false;
                     escolha = 0;
                     velX = temp;
-                    anim.SetTrigger("Sprawl");
+                    //anim.SetTrigger("Sprawl");
                     anim.SetFloat("VelX", 0);
                     //cont = 0;
                     ReCombat();
