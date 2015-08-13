@@ -75,6 +75,10 @@ public class MovmentPlayer : MonoBehaviour
 			anim.SetTrigger("Run");
 			transform.Translate(velX * Time.deltaTime, 0, 0);
 		}
+        else
+        {
+            velX = 0;
+        }
 
         if (isAttack)
         {
@@ -87,6 +91,7 @@ public class MovmentPlayer : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
             {
+                velX = 0;
                 prepareAttack = true;                
                 StartCoroutine("HeavyAttack");
             }
