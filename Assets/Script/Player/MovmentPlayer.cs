@@ -31,6 +31,7 @@ public class MovmentPlayer : MonoBehaviour
 
 	bool attackPower;
 	bool attack;
+    bool delayEsquiva;
 
 	void Awake()
 	{
@@ -90,12 +91,14 @@ public class MovmentPlayer : MonoBehaviour
 
         if (isAttack)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && !attack)
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && !attack && !delayEsquiva)
             {
                 isAttack = false;
                 Defesa();
                 anim.SetTrigger("Base");
                 esquiva = true;
+                delayEsquiva = true;
+                StartCoroutine("Delay");
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
             {
@@ -142,6 +145,12 @@ public class MovmentPlayer : MonoBehaviour
 			}
 		}
 	}
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(2);
+        delayEsquiva = false;
+    }
 
     public void Dano()
     {
