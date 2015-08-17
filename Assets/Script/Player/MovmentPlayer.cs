@@ -78,7 +78,10 @@ public class MovmentPlayer : MonoBehaviour
 		{
 			velX = temp;
 			anim.SetTrigger("Run");
-			transform.Translate(velX * Time.deltaTime, 0, 0);
+            if (obj == null)
+            {
+                transform.Translate(velX * Time.deltaTime, 0, 0);
+            }
 		}
         else
         {

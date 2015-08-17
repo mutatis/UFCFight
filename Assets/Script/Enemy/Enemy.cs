@@ -64,6 +64,11 @@ public class Enemy : MonoBehaviour
             anim.SetBool("Kill", true);
         }
 
+        if(obj != null)
+        {
+            velX = 0;
+        }
+
         if(selectAttack == 2)
         {
             if (player.prepareAttack == true)
@@ -377,6 +382,12 @@ public class Enemy : MonoBehaviour
 						anim.SetTrigger("Attack");
 						intervalo = true;
 					}
+                    if (dist <= distanciaSD && !fight)
+                    {
+                        velX = 0;
+                        anim.SetFloat("VelX", 0);
+                        Combat();
+                    }
                     StartCoroutine("SelectAttack");
                     break;
 					
@@ -386,7 +397,13 @@ public class Enemy : MonoBehaviour
 					{
 						anim.SetTrigger("Defesa");
 						intervalo = true;
-					}
+                    }
+                    if (dist <= distanciaSD && !fight)
+                    {
+                        velX = 0;
+                        anim.SetFloat("VelX", 0);
+                        Combat();
+                    }
                     StartCoroutine("SelectAttack");
                     break;
 
@@ -439,6 +456,7 @@ public class Enemy : MonoBehaviour
 		escolha = 1;
 		if(!para)
 		{
+            velX = 0;
             primeiro = false;
 			StartCoroutine("SelectAttack");
 			MovmentPlayer.player.StopPlayer ();

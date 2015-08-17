@@ -11,9 +11,12 @@ public class ChaoMov : MonoBehaviour
 
 	void Update ()
     {
-        transform.Translate((MovmentPlayer.player.velX * Time.deltaTime) * -1, 0, 0);	
+        if (MovmentPlayer.player.velX > 0 || MovmentPlayer.player.obj == null)
+        {
+            //transform.Translate((MovmentPlayer.player.velX * Time.deltaTime) * -1, 0, 0);
+        }
 
-        if(transform.position.x < limit.position.x || MovmentPlayer.player.velX <= 0)
+        if(transform.position.x < limit.position.x)
         {
             transform.position = new Vector3((atras.position.x + soma), transform.position.y, transform.position.z);
         }
