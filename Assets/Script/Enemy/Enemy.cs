@@ -449,8 +449,8 @@ public class Enemy : MonoBehaviour
 
 	void ReCombat()
 	{
-		//anim.SetFloat ("VelX", temp);
-		//anim.SetTrigger("Run");
+		anim.SetFloat ("VelX", temp);
+		anim.SetTrigger("Run");
 		anda = true;
 		sprawl = false;
 		selectSprawl = 1;

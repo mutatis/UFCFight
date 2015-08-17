@@ -55,6 +55,11 @@ public class MovmentPlayer : MonoBehaviour
             }
         }*/
 
+        if(obj != null)
+        {
+            velX = 0;
+        }
+
         if (rig.velocity.x < 0)
 		{
 			rig.velocity = new Vector2((rig.velocity.x + 0.05f), 0);
@@ -261,7 +266,7 @@ public class MovmentPlayer : MonoBehaviour
 		esquiva = false;
 	}
 
-    void OnCollisionEnter2D (Collision2D other)
+    void OnTriggerEnter2D (Collider2D other)
     {
         if(other.gameObject.tag == "Enemy")
         {
@@ -270,7 +275,7 @@ public class MovmentPlayer : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy")
         {
