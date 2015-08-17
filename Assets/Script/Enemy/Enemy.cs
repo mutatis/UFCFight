@@ -165,7 +165,8 @@ public class Enemy : MonoBehaviour
                             anim.SetTrigger("Run");
                             transform.Translate(velX * Time.deltaTime, 0, 0);
                         }
-                        randomAttack = 3;
+                        if(randomAttack != 3)
+                            randomAttack = 3;
                         break;
 
                     case 1:
@@ -371,7 +372,8 @@ public class Enemy : MonoBehaviour
 					{
 						velX = 0;
 					}
-                    randomAttack = 4;
+                    if(randomAttack != 4)
+                        randomAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 					
@@ -391,7 +393,8 @@ public class Enemy : MonoBehaviour
                         anim.SetFloat("VelX", 0);
                         Combat();
                     }
-                    randomAttack = 4;
+                    if (randomAttack != 4)
+                        randomAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 					
@@ -408,7 +411,8 @@ public class Enemy : MonoBehaviour
                         anim.SetFloat("VelX", 0);
                         Combat();
                     }
-                    randomAttack = 4;
+                    if (randomAttack != 4)
+                        randomAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 
@@ -426,7 +430,8 @@ public class Enemy : MonoBehaviour
                     ReCombat();
                     selectSprawl = 0;
                     selectAttack = 0;
-                    randomAttack = 3;
+                    if (randomAttack != 3)
+                        randomAttack = 3;
                     StopCoroutine("SelectAttack");
                     break;
 			}
