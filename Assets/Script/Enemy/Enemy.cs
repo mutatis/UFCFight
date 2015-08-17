@@ -22,13 +22,14 @@ public class Enemy : MonoBehaviour
 	MovmentPlayer player;
 
 	public int selectSprawl;
+    public int random;
 
-	float dist;	
+    float dist;	
 	float temp;
     float distTemp;
 
     int cont;
-    public int random;
+    int randomAttack;
 
 	bool primeiro;
 	bool anda;
@@ -41,7 +42,7 @@ public class Enemy : MonoBehaviour
 
 	void Start()
 	{
-		temp = velX;
+        temp = velX;
 		anim.SetFloat ("VelX", velX);
         escolha = Random.Range (0, 2);
 		if(escolha == 0)
@@ -346,7 +347,7 @@ public class Enemy : MonoBehaviour
 			}
 			intervalo = false;
 
-            selectAttack = Random.Range(0, 4);
+            selectAttack = Random.Range(0, randomAttack);
 
 			switch(selectAttack)
 			{
@@ -369,6 +370,7 @@ public class Enemy : MonoBehaviour
 					{
 						velX = 0;
 					}
+                    randomAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 					
@@ -388,6 +390,7 @@ public class Enemy : MonoBehaviour
                         anim.SetFloat("VelX", 0);
                         Combat();
                     }
+                    randomAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 					
@@ -404,6 +407,7 @@ public class Enemy : MonoBehaviour
                         anim.SetFloat("VelX", 0);
                         Combat();
                     }
+                    randomAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 
@@ -421,6 +425,7 @@ public class Enemy : MonoBehaviour
                     ReCombat();
                     selectSprawl = 0;
                     selectAttack = 0;
+                    randomAttack = 3;
                     StopCoroutine("SelectAttack");
                     break;
 			}
