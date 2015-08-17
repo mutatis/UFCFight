@@ -165,6 +165,7 @@ public class Enemy : MonoBehaviour
                             anim.SetTrigger("Run");
                             transform.Translate(velX * Time.deltaTime, 0, 0);
                         }
+                        randomAttack = 3;
                         break;
 
                     case 1:
