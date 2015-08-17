@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if(cont >= 1 && dist >= distanciaSD)
+        if(cont >= 1 && dist >= distanciaSD || (obj == null && escolha != 0 && selectSprawl != 0))
         {
             velX = temp;
             anim.SetFloat("VelX", temp);
