@@ -102,6 +102,7 @@ public class MovmentPlayer : MonoBehaviour
                 esquiva = true;
                 delayEsquiva = true;
                 StartCoroutine("Delay");
+				StopCoroutine("HeavyAttack");
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
             {
@@ -261,6 +262,7 @@ public class MovmentPlayer : MonoBehaviour
 		yield return new WaitForSeconds (0.8f);
 		prepareAttack = false;
 		attackPower = true;
+		yield return new WaitForSeconds(0.5f);
 		//temporario
 		AttackF();
 		anim.SetTrigger("HeavyAttack");
