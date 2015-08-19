@@ -284,6 +284,7 @@ public class MovmentPlayer : MonoBehaviour
         {
             obj = other.gameObject;
             other.gameObject.GetComponent<Enemy>().obj = gameObject;
+			obj.GetComponent<Enemy>().Combat();
         }
     }
 

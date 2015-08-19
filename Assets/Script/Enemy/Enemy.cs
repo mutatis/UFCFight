@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     float distTemp;
 
     int cont;
-    int randomAttack;
+    int numAttack;
 
 	bool primeiro;
 	bool anda;
@@ -65,10 +65,10 @@ public class Enemy : MonoBehaviour
             anim.SetBool("Kill", true);
         }
 
-        if(obj != null)
+       /* if(obj != null)
         {
             velX = 0;
-        }
+        }*/
 
         if(selectAttack == 2)
         {
@@ -165,8 +165,8 @@ public class Enemy : MonoBehaviour
                             anim.SetTrigger("Run");
                             transform.Translate(velX * Time.deltaTime, 0, 0);
                         }
-                        if(randomAttack != 3)
-                            randomAttack = 3;
+						if(numAttack != 3)
+							numAttack = 3;
                         break;
 
                     case 1:
@@ -347,9 +347,10 @@ public class Enemy : MonoBehaviour
 			{
 				player = obj.GetComponent<MovmentPlayer> ();
 			}
+
 			intervalo = false;
 
-            selectAttack = Random.Range(0, randomAttack);
+            selectAttack = Random.Range(0, 4);
 
 			switch(selectAttack)
 			{
@@ -372,8 +373,8 @@ public class Enemy : MonoBehaviour
 					{
 						velX = 0;
 					}
-                    if(randomAttack != 4)
-                        randomAttack = 4;
+					if(numAttack != 4)
+						numAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 					
@@ -393,8 +394,8 @@ public class Enemy : MonoBehaviour
                         anim.SetFloat("VelX", 0);
                         Combat();
                     }
-                    if (randomAttack != 4)
-                        randomAttack = 4;
+					if (numAttack != 4)
+						numAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 					
@@ -411,8 +412,8 @@ public class Enemy : MonoBehaviour
                         anim.SetFloat("VelX", 0);
                         Combat();
                     }
-                    if (randomAttack != 4)
-                        randomAttack = 4;
+					if (numAttack != 4)
+						numAttack = 4;
                     StartCoroutine("SelectAttack");
                     break;
 
@@ -430,8 +431,8 @@ public class Enemy : MonoBehaviour
                     ReCombat();
                     selectSprawl = 0;
                     selectAttack = 0;
-                    if (randomAttack != 3)
-                        randomAttack = 3;
+					if (numAttack != 3)
+						numAttack = 3;
                     StopCoroutine("SelectAttack");
                     break;
 			}
@@ -461,7 +462,7 @@ public class Enemy : MonoBehaviour
         }
 	}
 
-	void Combat()
+	public void Combat()
 	{
         cont++;
 		escolha = 1;
