@@ -33,6 +33,8 @@ public class MovmentPlayer : MonoBehaviour
 	bool attack;
     bool delayEsquiva;
 
+	public float lifeEnemy;
+
 	void Awake()
 	{
 		player = this;
@@ -59,6 +61,7 @@ public class MovmentPlayer : MonoBehaviour
         if(obj != null)
         {
             velX = 0;
+			lifeEnemy = obj.GetComponent<Enemy>().life;
         }
 
         if (rig.velocity.x < 0)
@@ -142,6 +145,7 @@ public class MovmentPlayer : MonoBehaviour
 				AttackF();
 				anim.SetTrigger("HeavyAttack");
 				StopCoroutine ("HeavyAttack");
+				attackPower = false;
 			}
 		}
 	}
