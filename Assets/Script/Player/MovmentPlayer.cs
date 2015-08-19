@@ -134,7 +134,7 @@ public class MovmentPlayer : MonoBehaviour
 		    }*/
         }
 
-		if(Input.GetKeyUp(KeyCode.RightArrow))
+		/*if(Input.GetKeyUp(KeyCode.RightArrow))
 		{
 			if(!fight)
 			{
@@ -147,37 +147,38 @@ public class MovmentPlayer : MonoBehaviour
 				StopCoroutine ("HeavyAttack");
 				attackPower = false;
 			}
-		}
+		}*/
 	}
 
+	//temo de intervalo entre a esquiva para nao ficar usando direto
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.1f); //colocar o delay certo aqui depois
+        yield return new WaitForSeconds(2f);
         delayEsquiva = false;
     }
-
+	//tomo dano	
     public void Dano()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine("Normal");
     }
-
+	//fim do dano
     IEnumerator Normal()
     {
         yield return new WaitForSeconds(0.3f);
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
-
+	//nao ataca enquanto toma dano
     public void StopDano()
     {
         isAttack = false;
     }
-
+	//morreu
 	void Morreu()
 	{
 		Application.LoadLevel("GameOver");
 	}
-
+	//entro em combate nao vai pra frente
 	public void StopPlayer()
 	{
 		velX = 0;
@@ -186,7 +187,7 @@ public class MovmentPlayer : MonoBehaviour
 		anim.SetTrigger("Idle");
 		stop = true;
 	}
-
+	//saiu do combate anda normal
 	public void ReturnPlayerMov()
 	{
 		velX = temp;
@@ -195,7 +196,7 @@ public class MovmentPlayer : MonoBehaviour
 		anim.SetTrigger("Run");
 		stop = false;
 	}
-
+	//entro em combate
 	public void IsFight()
 	{
 		if(fight)
@@ -203,7 +204,7 @@ public class MovmentPlayer : MonoBehaviour
 			anim.SetTrigger("Idle");
 		}
 	}
-
+	//soco normal
 	void Attack()
 	{
 		if(obj != null)
@@ -221,7 +222,7 @@ public class MovmentPlayer : MonoBehaviour
             }
 		}
 	}
-
+	//chute forte
 	void AttackF()
 	{
 		if(obj != null)
@@ -246,13 +247,13 @@ public class MovmentPlayer : MonoBehaviour
             }
 		}
 	}
-
+	//defendeu
 	void Defesa()
 	{
 		velX = 0;
 		anim.SetFloat ("VelX", velX);
 	}
-
+	//tempo de carga do chute forte
 	IEnumerator HeavyAttack()
 	{
         yield return new WaitForSeconds(0.2f);
@@ -260,8 +261,13 @@ public class MovmentPlayer : MonoBehaviour
 		yield return new WaitForSeconds (0.8f);
 		prepareAttack = false;
 		attackPower = true;
+		//temporario
+		AttackF();
+		anim.SetTrigger("HeavyAttack");
+		StopCoroutine ("HeavyAttack");
+		attackPower = false;
 	}
-
+	//paro chute forte no meio
 	public void StopHeavyAttack()
     {
         attackPower = false;
@@ -273,7 +279,7 @@ public class MovmentPlayer : MonoBehaviour
 		attack = false;
         isAttack = true;
     }
-
+	//esquiva com sucesso
 	public void Esquivei()
 	{
         isAttack = true;

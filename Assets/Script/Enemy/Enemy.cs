@@ -295,7 +295,7 @@ public class Enemy : MonoBehaviour
 			velX = 0;
 		}
 	}
-
+	//tomo chute e fico tonto
     public void Stun()
     {
         anim.SetTrigger("Dano");
@@ -303,12 +303,12 @@ public class Enemy : MonoBehaviour
         StartCoroutine("SelectAttack");
         ReCombat();
     }
-
+	//acerto o takedown
     void Sprawl()
     {
         MovmentPlayer.player.life = 0;
     }
-
+	//tomo dano
 	public void Dano()
 	{
 		anim.SetTrigger("Dano");
@@ -318,7 +318,7 @@ public class Enemy : MonoBehaviour
 		ReCombat ();
 		rig.velocity = new Vector2 (6, 0);
 	}
-
+	//acerto o soco
 	public void Attack()
 	{
 		ReCombat ();
@@ -330,7 +330,7 @@ public class Enemy : MonoBehaviour
 			MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
 		}
 	}
-
+	//escolhe oq vai fazer (soco, defesa, midtakedown)
 	IEnumerator SelectAttack()
 	{
 		if(velX == 0)
@@ -439,12 +439,12 @@ public class Enemy : MonoBehaviour
 			
 		}
 	}
-
+	//tomo dano nao pode fazer nada bool toma conta
     public void IDano()
     {
         dano = true;
     }
-
+	//morreu
 	public void Kill()
 	{
         dano = false;
@@ -461,7 +461,7 @@ public class Enemy : MonoBehaviour
             selectSprawl = 1;
         }
 	}
-
+	//entro em combate
 	public void Combat()
 	{
         cont++;
@@ -476,7 +476,7 @@ public class Enemy : MonoBehaviour
 		}
 		fight = true;
 	}
-
+	//volta ao combate
 	void ReCombat()
 	{
 		anim.SetFloat ("VelX", temp);
