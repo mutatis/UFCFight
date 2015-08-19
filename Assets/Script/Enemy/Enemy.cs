@@ -429,7 +429,7 @@ public class Enemy : MonoBehaviour
                     anim.SetFloat("VelX", 0);
                     //cont = 0;
                     ReCombat();
-                    selectSprawl = 0;
+                    selectSprawl = Random.Range(0, 4);
                     selectAttack = 0;
 					if (numAttack != 3)
 						numAttack = 3;
