@@ -8,6 +8,6 @@ public class LifeCountEnemy : MonoBehaviour
 	
 	void Update ()
 	{
-		text.text = "Life Enemy: " + MovmentPlayer.player. lifeEnemy.ToString();
+		text.text = "Enemy Life: " + MovmentPlayer.player. lifeEnemy.ToString();
 	}
 }
