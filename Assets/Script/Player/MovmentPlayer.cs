@@ -148,7 +148,7 @@ public class MovmentPlayer : MonoBehaviour
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.1f); //colocar o delay certo aqui depois
         delayEsquiva = false;
     }
 
@@ -284,7 +284,10 @@ public class MovmentPlayer : MonoBehaviour
         {
             obj = other.gameObject;
             other.gameObject.GetComponent<Enemy>().obj = gameObject;
-			obj.GetComponent<Enemy>().Combat();
+			if(obj.GetComponent<Enemy>().escolha != 0 && obj.GetComponent<Enemy>().selectSprawl != 0)
+			{
+				obj.GetComponent<Enemy>().Combat();
+			}
         }
     }
 
