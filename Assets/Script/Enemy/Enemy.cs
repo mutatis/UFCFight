@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
 	bool intervalo;
     bool atacatroll;
     bool dano;
+    bool umaVez;
 
 	void Start()
 	{
@@ -333,7 +334,11 @@ public class Enemy : MonoBehaviour
 	//escolhe oq vai fazer (soco, defesa, midtakedown)
 	IEnumerator SelectAttack()
 	{
-		if(velX == 0)
+        selectAttack = Random.Range(0, 4);
+
+        umaVez = false;
+
+        if (velX == 0)
 		{
 			if(!primeiro)
 			{
@@ -350,12 +355,10 @@ public class Enemy : MonoBehaviour
 
 			intervalo = false;
 
-            selectAttack = Random.Range(0, 4);
-
 			switch(selectAttack)
 			{
 				case 0:
-                    //nao faz nada
+                    print("nao faz nada" + Time.time);
 					if(dist <= distanciaSD && !fight)
 					{
 						velX = 0;
@@ -364,7 +367,7 @@ public class Enemy : MonoBehaviour
 						Combat ();
 					}
 					
-					if(dist > distanciaSD && !fight)
+					/*if(dist > distanciaSD && !fight)
 					{
 						velX = temp;
 						transform.Translate(velX * Time.deltaTime, 0, 0);
@@ -372,14 +375,20 @@ public class Enemy : MonoBehaviour
 					else
 					{
 						velX = 0;
-					}
+					}*/
 					if(numAttack != 4)
 						numAttack = 4;
-                    StartCoroutine("SelectAttack");
+
+                    if (!umaVez)
+                    {
+                        PP();
+                        umaVez = true;
+                    }
+                    //StartCoroutine("SelectAttack");
                     break;
 					
 				case 1:
-                    //da soco
+                    print("da soco" + Time.time);
 					if(!intervalo)
 					{
 					    //anim.SetTrigger("PAttack");
@@ -396,11 +405,17 @@ public class Enemy : MonoBehaviour
                     }
 					if (numAttack != 4)
 						numAttack = 4;
-                    StartCoroutine("SelectAttack");
+
+                    if (!umaVez)
+                    {
+                        PP();
+                        umaVez = true;
+                    }
+                    //StartCoroutine("SelectAttack");
                     break;
 					
 				case 2:
-                    //defende
+                    print("defende" + Time.time);
 					if(!intervalo)
 					{
 						anim.SetTrigger("Defesa");
@@ -414,11 +429,17 @@ public class Enemy : MonoBehaviour
                     }
 					if (numAttack != 4)
 						numAttack = 4;
-                    StartCoroutine("SelectAttack");
+
+                    if (!umaVez)
+                    {
+                        PP();
+                        umaVez = true;
+                    }
+                    //StartCoroutine("SelectAttack");
                     break;
 
                 case 3:
-                    //mid takedown
+                    print("mid takedown" + Time.time);
                     rig.velocity = new Vector2(10, 0);
                     yield return new WaitForSeconds(0.5f);
                     rig.velocity = new Vector2(0, 0);
@@ -439,6 +460,13 @@ public class Enemy : MonoBehaviour
 			
 		}
 	}
+
+    public void PP()
+    {
+        StopCoroutine("SelectAttack");
+        StartCoroutine("SelectAttack");
+    }
+
 	//tomo dano nao pode fazer nada bool toma conta
     public void IDano()
     {
