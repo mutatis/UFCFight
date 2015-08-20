@@ -66,10 +66,12 @@ public class Enemy : MonoBehaviour
             anim.SetBool("Kill", true);
         }
 
-       /* if(obj != null)
+        if(obj != null && fight)
         {
-            velX = 0;
-        }*/
+            print("AAAAAAAAAAAAAAAAAAAAAAA");
+            StartCoroutine("SelectAttack");
+            fight = true;
+        }
 
         if(selectAttack == 2)
         {
@@ -296,6 +298,7 @@ public class Enemy : MonoBehaviour
 			velX = 0;
 		}
 	}
+
 	//tomo chute e fico tonto
     public void Stun()
     {
@@ -304,11 +307,13 @@ public class Enemy : MonoBehaviour
         StartCoroutine("SelectAttack");
         ReCombat();
     }
+
 	//acerto o takedown
     void Sprawl()
     {
         MovmentPlayer.player.life = 0;
     }
+
 	//tomo dano
 	public void Dano()
 	{
@@ -319,6 +324,7 @@ public class Enemy : MonoBehaviour
 		ReCombat ();
 		rig.velocity = new Vector2 (6, 0);
 	}
+
 	//acerto o soco
 	public void Attack()
 	{
@@ -331,6 +337,7 @@ public class Enemy : MonoBehaviour
 			MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
 		}
 	}
+
 	//escolhe oq vai fazer (soco, defesa, midtakedown)
 	IEnumerator SelectAttack()
 	{
@@ -450,7 +457,8 @@ public class Enemy : MonoBehaviour
                     anim.SetFloat("VelX", 0);
                     //cont = 0;
                     ReCombat();
-                    selectSprawl = Random.Range(0, 4);
+                    selectSprawl = 0;
+                        //Random.Range(0, 4);
                     selectAttack = 0;
 					if (numAttack != 3)
 						numAttack = 3;
@@ -464,7 +472,20 @@ public class Enemy : MonoBehaviour
     public void PP()
     {
         StopCoroutine("SelectAttack");
+        StopCoroutine("AntiBug");
         StartCoroutine("SelectAttack");
+        StartCoroutine("AntiBug");
+    }
+
+    IEnumerator AntiBug()
+    {
+        var tipo = selectAttack;
+        yield return new WaitForSeconds(1);
+        if(tipo == selectAttack && fight)
+        {
+            StopCoroutine("SelectAttack");
+            StartCoroutine("SelectAttack");
+        }
     }
 
 	//tomo dano nao pode fazer nada bool toma conta
@@ -472,6 +493,7 @@ public class Enemy : MonoBehaviour
     {
         dano = true;
     }
+
 	//morreu
 	public void Kill()
 	{
@@ -489,6 +511,7 @@ public class Enemy : MonoBehaviour
             selectSprawl = 1;
         }
 	}
+
 	//entro em combate
 	public void Combat()
 	{
@@ -504,6 +527,7 @@ public class Enemy : MonoBehaviour
 		}
 		fight = true;
 	}
+
 	//volta ao combate
 	void ReCombat()
 	{
