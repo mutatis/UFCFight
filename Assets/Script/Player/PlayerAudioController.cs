@@ -66,7 +66,15 @@ public class PlayerAudioController : MonoBehaviour
     //som de socoForte
     public void SocoForte()
     {
-        AudioSource.PlayClipAtPoint(chute, transform.position, 1f);
+        Destroy(GameObject.FindGameObjectWithTag("Carrega"));
+        if (MovmentPlayer.player.obj != null)
+        {
+            AudioSource.PlayClipAtPoint(chute, transform.position, 1f);
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], transform.position, 1f);
+        }
         AudioSource.PlayClipAtPoint(gritoChute, transform.position, 0.3f);
         isCarrega = false;
     }

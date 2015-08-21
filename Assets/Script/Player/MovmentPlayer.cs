@@ -275,13 +275,12 @@ public class MovmentPlayer : MonoBehaviour
 		prepareAttack = false;
 		attackPower = true;
 		yield return new WaitForSeconds(0.5f);
-        Destroy(GameObject.FindGameObjectWithTag("Carrega"));
         //temporario
         AttackF();
 		anim.SetTrigger("HeavyAttack");
 		StopCoroutine ("HeavyAttack");
 		attackPower = false;
-	}
+    }
 
 	//paro chute forte no meio
 	public void StopHeavyAttack()

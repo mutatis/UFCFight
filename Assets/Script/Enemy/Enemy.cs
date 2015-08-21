@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
 
         if(selectAttack == 2)
         {
-            if (player.prepareAttack == true)
+            if (player.prepareAttack == true && obj != null)
             {
                 //escolhe o ataque
                 atacatroll = true;
