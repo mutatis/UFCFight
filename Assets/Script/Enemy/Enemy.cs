@@ -73,9 +73,9 @@ public class Enemy : MonoBehaviour
             fight = true;
         }
 
-        if(selectAttack == 2)
+        if(selectAttack == 2 && obj != null)
         {
-            if (player.prepareAttack == true && obj != null)
+            if (player.prepareAttack == true)
             {
                 //escolhe o ataque
                 atacatroll = true;
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if(cont >= 1 && dist >= distanciaSD || (obj == null && escolha != 0 && selectSprawl != 0))
+        if((cont >= 1 && dist >= distanciaSD) || (obj == null && escolha != 0 && selectSprawl != 0))
         {
             velX = temp;
             anim.SetFloat("VelX", temp);
