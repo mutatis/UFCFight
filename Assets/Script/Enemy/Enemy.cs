@@ -68,7 +68,6 @@ public class Enemy : MonoBehaviour
 
         if(obj != null && fight)
         {
-            print("AAAAAAAAAAAAAAAAAAAAAAA");
             StartCoroutine("SelectAttack");
             fight = true;
         }
@@ -365,7 +364,6 @@ public class Enemy : MonoBehaviour
 			switch(selectAttack)
 			{
 				case 0:
-                    print("nao faz nada" + Time.time);
 					if(dist <= distanciaSD && !fight)
 					{
 						velX = 0;
@@ -395,7 +393,6 @@ public class Enemy : MonoBehaviour
                     break;
 					
 				case 1:
-                    print("da soco" + Time.time);
 					if(!intervalo)
 					{
 					    //anim.SetTrigger("PAttack");
@@ -422,7 +419,6 @@ public class Enemy : MonoBehaviour
                     break;
 					
 				case 2:
-                    print("defende" + Time.time);
 					if(!intervalo)
 					{
 						anim.SetTrigger("Defesa");
@@ -446,7 +442,6 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case 3:
-                    print("mid takedown" + Time.time);
                     rig.velocity = new Vector2(10, 0);
                     yield return new WaitForSeconds(0.5f);
                     rig.velocity = new Vector2(0, 0);
