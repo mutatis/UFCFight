@@ -94,7 +94,17 @@ public class MovmentPlayer : MonoBehaviour
 
         if (isAttack)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && !attack && !delayEsquiva)
+            if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
+            {
+                velX = 0;
+                prepareAttack = true;
+                StartCoroutine("HeavyAttack");
+            }
+            else if(Input.GetKey(KeyCode.RightArrow))
+            {
+
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) && !attack && !delayEsquiva && !prepareAttack)
             {
                 isAttack = false;
                 Defesa();
@@ -103,12 +113,6 @@ public class MovmentPlayer : MonoBehaviour
                 delayEsquiva = true;
                 StartCoroutine("Delay");
 				StopCoroutine("HeavyAttack");
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow) && !esquiva && !attack)
-            {
-                velX = 0;
-                prepareAttack = true;                
-                StartCoroutine("HeavyAttack");
             }
             else if (Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
             {
@@ -152,7 +156,7 @@ public class MovmentPlayer : MonoBehaviour
 		}*/
 	}
 
-	//temo de intervalo entre a esquiva para nao ficar usando direto
+	//temp  o de intervalo entre a esquiva para nao ficar usando direto
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(2f);
@@ -163,6 +167,7 @@ public class MovmentPlayer : MonoBehaviour
     public void Dano()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        rig.velocity = new Vector2(-7, 0);
         StartCoroutine("Normal");
     }
 

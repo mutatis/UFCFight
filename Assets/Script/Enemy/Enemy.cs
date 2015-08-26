@@ -96,6 +96,7 @@ public class Enemy : MonoBehaviour
             anim.SetFloat("VelX", temp);
             anim.SetTrigger("Run");
             transform.Translate(velX * Time.deltaTime, 0, 0);
+            StopCoroutine("SelectAttack");
         }
         else
         {
@@ -113,11 +114,11 @@ public class Enemy : MonoBehaviour
 
         if (rig.velocity.x > 0)
 		{
-			rig.velocity = new Vector2((rig.velocity.x - 0.05f), 0);
+			rig.velocity = new Vector2((rig.velocity.x - 0.05f), rig.velocity.y);
 		}
 		else
 		{
-			rig.velocity = new Vector2(0, 0);
+			rig.velocity = new Vector2(0, rig.velocity.y);
 		}
 
         if (!dano)
@@ -321,21 +322,20 @@ public class Enemy : MonoBehaviour
 		StartCoroutine ("SelectAttack");
         escolha = 1;
 		ReCombat ();
-		rig.velocity = new Vector2 (6, 0);
+		rig.velocity = new Vector2 (6, 3);
 	}
 
 	//acerto o soco
 	public void Attack()
 	{
-		ReCombat ();
 		if(obj != null)
 		{
             MovmentPlayer.player.isAttack = true;
             MovmentPlayer.player.Dano();
 			MovmentPlayer.player.life -= 1;
-			MovmentPlayer.player.rig.velocity = new Vector2(-4, 0);
-		}
-	}
+        }
+        ReCombat();
+    }
 
 	//escolhe oq vai fazer (soco, defesa, midtakedown)
 	IEnumerator SelectAttack()
