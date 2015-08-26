@@ -167,7 +167,6 @@ public class MovmentPlayer : MonoBehaviour
     public void Dano()
     {
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        rig.velocity = new Vector2(-7, 0);
         StartCoroutine("Normal");
     }
 

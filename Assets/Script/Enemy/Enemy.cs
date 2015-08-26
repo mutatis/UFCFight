@@ -311,7 +311,7 @@ public class Enemy : MonoBehaviour
 	//acerto o takedown
     void Sprawl()
     {
-        MovmentPlayer.player.life = 0;
+        MovmentPlayer.player.life = -1;
     }
 
 	//tomo dano
