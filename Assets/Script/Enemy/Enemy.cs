@@ -442,9 +442,9 @@ public class Enemy : MonoBehaviour
                     break;
 
                 case 3:
-                    rig.velocity = new Vector2(10, 0);
+                    rig.velocity = new Vector2(10, 2);
                     yield return new WaitForSeconds(0.5f);
-                    rig.velocity = new Vector2(0, 0);
+                    rig.velocity = new Vector2(0, rig.velocity.y);
                     sprawl = false;
                     escolha = 0;
                     velX = temp;
