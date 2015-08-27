@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
             fight = true;
         }
 
-        if(selectAttack == 2 && obj != null)
+        if(selectAttack == 2 && player != null)
         {
             if (player.prepareAttack == true)
             {
