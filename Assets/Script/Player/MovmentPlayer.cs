@@ -126,7 +126,7 @@ public class MovmentPlayer : MonoBehaviour
                 }
                 if(obj == null)
                 {
-                    audioController.Soco();
+                   // audioController.Soco();
                 }
                 Attack();
                 anim.SetTrigger("Attack");
@@ -228,7 +228,6 @@ public class MovmentPlayer : MonoBehaviour
 			enemy = obj.GetComponent<Enemy> ();
 			if(enemy.selectAttack != 2)
             {
-                audioController.Soco();
                 enemy.anim.SetTrigger("Dano");
                 enemy.life -= 2;
 			}
