@@ -229,8 +229,8 @@ public class MovmentPlayer : MonoBehaviour
 			if(enemy.selectAttack != 2)
             {
                 audioController.Soco();
-                enemy.Dano();
-				enemy.life -= 2;
+                enemy.anim.SetTrigger("Dano");
+                enemy.life -= 2;
 			}
             else if(enemy.selectAttack == 2)
             {
@@ -238,6 +238,12 @@ public class MovmentPlayer : MonoBehaviour
             }
 		}
 	}
+
+    public void Soquei()
+    {
+        if (obj != null && enemy.selectAttack != 2)
+            enemy.Dano();
+    }
 
 	//chute forte
 	void AttackF()
