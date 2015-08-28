@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/* Codigo para controla a mao do inimigo
+Sempre q o inimigo chamar um animacao nova chama uma funcao dessa */
+
 public class EnemyHandController : MonoBehaviour
 {
     public Animator anim;
