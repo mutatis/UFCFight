@@ -20,6 +20,7 @@ public class PlayerAudioController : MonoBehaviour
     public AudioClip esquiva;
 
     bool isCarrega;
+    bool obj;
 
     void Update()
     {
@@ -50,10 +51,25 @@ public class PlayerAudioController : MonoBehaviour
         AudioSource.PlayClipAtPoint(blockEnemy, transform.position, 1f);
     }
 
+    public void PrimeiroSoco()
+    {
+        if (MovmentPlayer.player.obj != null)
+        {
+            obj = true;
+            AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], transform.position, 0.5f);
+        }
+        else
+        {
+            obj = false;
+            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], transform.position, 0.5f);
+        }
+        isCarrega = false;
+    }
+
     //som de soco
     public void Soco()
     {
-        if (MovmentPlayer.player.obj != null)
+        if (obj)
         {
             AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], transform.position, 1f);
         }
