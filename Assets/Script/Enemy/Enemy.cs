@@ -4,7 +4,6 @@ using System.Collections;
 public class Enemy : MonoBehaviour 
 {
 	public Animator anim;
-    public Animator handAnim;
     
 	public Rigidbody2D rig;
 
@@ -46,7 +45,6 @@ public class Enemy : MonoBehaviour
 	{
         temp = velX;
 		anim.SetFloat ("VelX", velX);
-        handAnim.SetFloat("VelX", velX);
         escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
@@ -66,7 +64,6 @@ public class Enemy : MonoBehaviour
         if(life <= 0)
         {
             anim.SetBool("Kill", true);
-            handAnim.SetBool("Kill", true);
         }
 
         if(obj != null && fight)
@@ -87,7 +84,6 @@ public class Enemy : MonoBehaviour
                    selectAttack = 1;
                     Attack();
                     anim.SetTrigger("Attack");
-                    handAnim.SetTrigger("Attack");
                     intervalo = true;
                 }
                 atacatroll = false;
@@ -98,16 +94,13 @@ public class Enemy : MonoBehaviour
         {
             velX = temp;
             anim.SetFloat("VelX", temp);
-            handAnim.SetFloat("VelX", temp);
             anim.SetTrigger("Run");
-            handAnim.SetTrigger("Run");
             transform.Translate(velX * Time.deltaTime, 0, 0);
             StopCoroutine("SelectAttack");
         }
         else
         {
             anim.SetFloat("VelX", 0);
-            handAnim.SetFloat("VelX", 0);
         }
 
 		if(dist <= (distanciaSD + 0.5f))
@@ -142,8 +135,6 @@ public class Enemy : MonoBehaviour
                             velX = 0;
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
-                            handAnim.SetFloat("VelX", 0);
-                            handAnim.SetTrigger("Idle");
                         }
                         else if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
                         {
@@ -152,8 +143,6 @@ public class Enemy : MonoBehaviour
                             transform.Translate((velX * 10) * Time.deltaTime, 0, 0);
                             anim.SetFloat("VelX", velX);
                             anim.SetTrigger("Sprawl");
-                            handAnim.SetFloat("VelX", velX);
-                            handAnim.SetTrigger("Sprawl");
                         }
                         else if (dist <= distanciaSD || obj != null)
                         {
@@ -167,8 +156,6 @@ public class Enemy : MonoBehaviour
                                 MovmentPlayer.player.Esquivei();
                                 anim.SetFloat("VelX", 0);
                                 anim.SetTrigger("Idle");
-                                handAnim.SetFloat("VelX", 0);
-                                handAnim.SetTrigger("Idle");
                                 Combat();
                                 sprawl = true;
                                 velX = 0;
@@ -179,8 +166,6 @@ public class Enemy : MonoBehaviour
                             velX = temp;
                             anim.SetFloat("VelX", temp);
                             anim.SetTrigger("Run");
-                            handAnim.SetFloat("VelX", temp);
-                            handAnim.SetTrigger("Run");
                             transform.Translate(velX * Time.deltaTime, 0, 0);
                         }
 						if(numAttack != 3)
@@ -196,8 +181,6 @@ public class Enemy : MonoBehaviour
                             transform.Translate(velX * Time.deltaTime, 0, 0);
                             anim.SetFloat("VelX", velX);
                             anim.SetTrigger("Run");
-                            handAnim.SetFloat("VelX", velX);
-                            handAnim.SetTrigger("Run");
                         }
                         else if (dist <= distanciaSD)
                         {
@@ -215,8 +198,6 @@ public class Enemy : MonoBehaviour
                             velX = 0;
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
-                            handAnim.SetFloat("VelX", 0);
-                            handAnim.SetTrigger("Idle");
                         }
                         else if (dist < (distanciaSprawl - 1.5f) && random == 0)
                         {
@@ -232,15 +213,12 @@ public class Enemy : MonoBehaviour
                                 transform.Translate(velX * Time.deltaTime, 0, 0);
                                 anim.SetFloat("VelX", velX);
                                 anim.SetTrigger("Run");
-                                handAnim.SetFloat("VelX", velX);
-                                handAnim.SetTrigger("Run");
                             }
                             //para;
                             else if (dist <= distanciaSD)
                             {
                                 MovmentPlayer.player.Esquivei();
                                 anim.SetTrigger("Run");
-                                handAnim.SetTrigger("Run");
                                 Combat();
                                 sprawl = true;
                                 velX = 0;
@@ -251,8 +229,6 @@ public class Enemy : MonoBehaviour
                                 velX = temp;
                                 anim.SetFloat("VelX", temp);
                                 anim.SetTrigger("Run");
-                                handAnim.SetFloat("VelX", temp);
-                                handAnim.SetTrigger("Run");
                                 transform.Translate(velX * Time.deltaTime, 0, 0);
                             }
                         }
@@ -263,8 +239,6 @@ public class Enemy : MonoBehaviour
                                 velX = 0;
                                 anim.SetFloat("VelX", 0);
                                 anim.SetTrigger("Idle");
-                                handAnim.SetFloat("VelX", 0);
-                                handAnim.SetTrigger("Idle");
                             }
                             else
                             {
@@ -293,8 +267,6 @@ public class Enemy : MonoBehaviour
                             velX = 0;
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
-                            handAnim.SetFloat("VelX", 0);
-                            handAnim.SetTrigger("Idle");
                             Combat();
                         }
 
@@ -314,8 +286,6 @@ public class Enemy : MonoBehaviour
                             velX = 0;
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
-                            handAnim.SetFloat("VelX", 0);
-                            handAnim.SetTrigger("Idle");
                             Combat();
                         }
                         break;
@@ -333,7 +303,6 @@ public class Enemy : MonoBehaviour
     public void Stun()
     {
         anim.SetTrigger("Dano");
-        handAnim.SetTrigger("Dano");
         StopCoroutine("SelectAttack");
         StartCoroutine("SelectAttack");
         ReCombat();
@@ -352,7 +321,6 @@ public class Enemy : MonoBehaviour
 	public void Dano()
 	{
 		anim.SetTrigger("Dano");
-        handAnim.SetTrigger("Dano");
         StopCoroutine("SelectAttack");
 		StartCoroutine ("SelectAttack");
         escolha = 1;
@@ -404,8 +372,6 @@ public class Enemy : MonoBehaviour
 						velX = 0;
 						anim.SetFloat("VelX", 0);
 						anim.SetTrigger("Idle");
-                        handAnim.SetFloat("VelX", 0);
-                        handAnim.SetTrigger("Idle");
                         Combat ();
 					}
 					
@@ -436,14 +402,12 @@ public class Enemy : MonoBehaviour
 						//yield return new WaitForSeconds(1f);
 						Attack ();
 						anim.SetTrigger("Attack");
-                        handAnim.SetTrigger("Attack");
                         intervalo = true;
 					}
                     if (dist <= distanciaSD && !fight)
                     {
                         velX = 0;
                         anim.SetFloat("VelX", 0);
-                        handAnim.SetFloat("VelX", 0);
                         Combat();
                     }
 					if (numAttack != 4)
@@ -461,14 +425,12 @@ public class Enemy : MonoBehaviour
 					if(!intervalo)
 					{
 						anim.SetTrigger("Defesa");
-                        handAnim.SetTrigger("Defesa");
                         intervalo = true;
                     }
                     if (dist <= distanciaSD && !fight)
                     {
                         velX = 0;
                         anim.SetFloat("VelX", 0);
-                        handAnim.SetFloat("VelX", 0);
                         Combat();
                     }
 					if (numAttack != 4)
@@ -491,7 +453,6 @@ public class Enemy : MonoBehaviour
                     velX = temp;
                     //anim.SetTrigger("Sprawl");
                     anim.SetFloat("VelX", 0);
-                    handAnim.SetFloat("VelX", 0);
                     //cont = 0;
                     ReCombat();
                     selectSprawl = 0;
@@ -570,8 +531,6 @@ public class Enemy : MonoBehaviour
 	{
 		anim.SetFloat ("VelX", temp);
 		anim.SetTrigger("Run");
-        handAnim.SetFloat("VelX", temp);
-        handAnim.SetTrigger("Run");
         anda = true;
 		sprawl = false;
 		selectSprawl = 1;
