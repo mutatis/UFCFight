@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/* Codigo q toma conta do PLayer */
+
 public class MovmentPlayer : MonoBehaviour 
 {
 	public static MovmentPlayer player;

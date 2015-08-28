@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/* Gerencia todas as acoes do inimigo */
+
 public class Enemy : MonoBehaviour 
 {
 	public Animator anim;

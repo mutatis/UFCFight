@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/* Toma conta dos sons do player */
+
 public class PlayerAudioController : MonoBehaviour
 {
     public AudioSource audios;

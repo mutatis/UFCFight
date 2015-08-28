@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*Movimenta o chao para acompanhar o player */
+
 public class ChaoMov : MonoBehaviour
 {
 

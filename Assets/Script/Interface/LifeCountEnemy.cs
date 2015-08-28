@@ -2,6 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/* Mostra a vida do inimigo que esta em combate no momento */
+
 public class LifeCountEnemy : MonoBehaviour
 {
 	public Text text;
