@@ -373,6 +373,7 @@ public class Enemy : MonoBehaviour
 
 			switch(selectAttack)
 			{
+                //nao faz nada
 				case 0:
 					if(dist <= distanciaSD && !fight)
 					{
@@ -402,6 +403,7 @@ public class Enemy : MonoBehaviour
                     //StartCoroutine("SelectAttack");
                     break;
 					
+                    //soca
 				case 1:
 					if(!intervalo)
 					{
@@ -428,6 +430,7 @@ public class Enemy : MonoBehaviour
                     //StartCoroutine("SelectAttack");
                     break;
 					
+                    //defende
 				case 2:
 					if(!intervalo)
 					{
@@ -451,6 +454,7 @@ public class Enemy : MonoBehaviour
                     //StartCoroutine("SelectAttack");
                     break;
 
+                    //mid takedown
                 case 3:
                     rig.velocity = new Vector2(10, 2);
                     yield return new WaitForSeconds(0.5f);
