@@ -8,6 +8,6 @@ public class LifeCount : MonoBehaviour
 	
 	void Update ()
     {
-        text.text = "Life: " + MovmentPlayer.player. life.ToString();
+        text.text = "Life: " + PlayerController.player. life.ToString();
 	}
 }

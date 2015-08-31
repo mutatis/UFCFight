@@ -11,6 +11,6 @@ public class LifeCountEnemy : MonoBehaviour
 	void Update ()
 	{
 		//mostra a vida do inimigo que vc ganho
-		text.text = "Enemy Life: " + MovmentPlayer.player. lifeEnemy.ToString();
+		text.text = "Enemy Life: " + PlayerController.player. lifeEnemy.ToString();
 	}
 }

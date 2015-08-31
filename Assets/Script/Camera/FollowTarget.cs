@@ -16,7 +16,7 @@ public class FollowTarget : MonoBehaviour
     /// </summary>
 	void FixedUpdate ()
 	{
-        if (MovmentPlayer.player.velX > 0)
+        if (PlayerController.player.velX > 0)
         {
             xPosition = target.position.x + offset.x;
             yPosition = offset.y;

@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
 	public GameObject obj;
 
-	MovmentPlayer player;
+    PlayerController player;
 
 	public int selectTakedown;
     public int random;
@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
 
 	void Update()
 	{
-		dist = Vector3.Distance(MovmentPlayer.player.transform.position, transform.position);
+		dist = Vector3.Distance(PlayerController.player.transform.position, transform.position);
 
         if(life <= 0)
         {
@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
         }
         else if (cont > 0)
         {
-            MovmentPlayer.player.ReturnPlayerMov();
+            PlayerController.player.ReturnPlayerMov();
         }
 
         if (rig.velocity.x > 0)
@@ -152,14 +152,14 @@ public class Enemy : MonoBehaviour
                         }
                         else if (dist <= distanciaSD || obj != null)
                         {
-                            if (!MovmentPlayer.player.esquiva)
+                            if (!PlayerController.player.esquiva)
                             {
                                 Sprawl();
                             }
                             else
                             {
-                                MovmentPlayer.player.isEsquiva = true;
-                                MovmentPlayer.player.Esquivei();
+                                PlayerController.player.isEsquiva = true;
+                                PlayerController.player.Esquivei();
                                 anim.SetFloat("VelX", 0);
                                 anim.SetTrigger("Idle");
                                 Combat();
@@ -223,7 +223,7 @@ public class Enemy : MonoBehaviour
                             //para;
                             else if (dist <= distanciaSD)
                             {
-                                MovmentPlayer.player.Esquivei();
+                                PlayerController.player.Esquivei();
                                 anim.SetTrigger("Run");
                                 Combat();
                                 sprawl = true;
@@ -317,9 +317,9 @@ public class Enemy : MonoBehaviour
 	//acerto o takedown
     void Sprawl()
     {
-        while (MovmentPlayer.player.life > 0)
+        while (PlayerController.player.life > 0)
         {
-            MovmentPlayer.player.life -= 1;
+            PlayerController.player.life -= 1;
         }
     }
 
@@ -339,9 +339,9 @@ public class Enemy : MonoBehaviour
 	{
 		if(obj != null)
 		{
-            MovmentPlayer.player.isAttack = true;
-            MovmentPlayer.player.Dano();
-			MovmentPlayer.player.life -= 1;
+            PlayerController.player.isAttack = true;
+            PlayerController.player.Dano();
+            PlayerController.player.life -= 1;
         }
         ReCombat();
     }
@@ -366,7 +366,7 @@ public class Enemy : MonoBehaviour
 			}
 			if(obj != null)
 			{
-				player = obj.GetComponent<MovmentPlayer> ();
+				player = obj.GetComponent<PlayerController> ();
 			}
 
 			intervalo = false;
@@ -506,7 +506,7 @@ public class Enemy : MonoBehaviour
 		if(life <= 0)
 		{
 			fight = false;
-			MovmentPlayer.player.ReturnPlayerMov ();
+            PlayerController.player.ReturnPlayerMov ();
 			GameMaster.master.vitorias += 1;
 			Destroy (gameObject);
 		}
@@ -527,7 +527,7 @@ public class Enemy : MonoBehaviour
             velX = 0;
             primeiro = false;
 			StartCoroutine("SelectAttack");
-			MovmentPlayer.player.StopPlayer ();
+            PlayerController.player.StopPlayer ();
 			para = true;
 		}
 		fight = true;
@@ -545,7 +545,7 @@ public class Enemy : MonoBehaviour
 		if(para)
 		{
 			StopCoroutine("SelectAttack");
-			MovmentPlayer.player.ReturnPlayerMov ();
+            PlayerController.player.ReturnPlayerMov ();
 			para = false;
 		}
 		fight = false;

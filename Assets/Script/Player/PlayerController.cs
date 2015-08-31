@@ -3,9 +3,9 @@ using System.Collections;
 
 /* Codigo q toma conta do PLayer */
 
-public class MovmentPlayer : MonoBehaviour 
+public class PlayerController : MonoBehaviour 
 {
-	public static MovmentPlayer player;
+	public static PlayerController player;
 
     public PlayerAudioController audioController;
 

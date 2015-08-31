@@ -24,19 +24,19 @@ public class PlayerAudioController : MonoBehaviour
 
     void Update()
     {
-        if (MovmentPlayer.player.velX > 0 && !audios.isPlaying)
+        if (PlayerController.player.velX > 0 && !audios.isPlaying)
         {
             audios.Play();
         }
-        else if (MovmentPlayer.player.velX == 0)
+        else if (PlayerController.player.velX == 0)
         {
             audios.Stop();
         }
 
-        if(MovmentPlayer.player.isEsquiva)
+        if(PlayerController.player.isEsquiva)
         {
             AudioSource.PlayClipAtPoint(esquiva, transform.position, 1f);
-            MovmentPlayer.player.isEsquiva = false;
+            PlayerController.player.isEsquiva = false;
         }
 
         if(Input.GetKeyUp(KeyCode.RightArrow))
@@ -53,7 +53,7 @@ public class PlayerAudioController : MonoBehaviour
 
     public void PrimeiroSoco()
     {
-        if (MovmentPlayer.player.obj != null)
+        if (PlayerController.player.obj != null)
         {
             obj = true;
             AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], transform.position, 0.5f);
@@ -89,7 +89,7 @@ public class PlayerAudioController : MonoBehaviour
     public void SocoForte()
     {
         Destroy(GameObject.FindGameObjectWithTag("Carrega"));
-        if (MovmentPlayer.player.obj != null)
+        if (PlayerController.player.obj != null)
         {
             AudioSource.PlayClipAtPoint(chute, transform.position, 1f);
         }
@@ -114,7 +114,7 @@ public class PlayerAudioController : MonoBehaviour
     //som do sprawl
     public void Sprawl()
     {
-        if (MovmentPlayer.player.esquiva)
+        if (PlayerController.player.esquiva)
         {
             AudioSource.PlayClipAtPoint(sprawl, transform.position, 1f);
         }
