@@ -6,6 +6,8 @@ using System.Collections;
 public class Enemy : MonoBehaviour 
 {
 	public Animator anim;
+
+    public Probalidade probalidade;
     
 	public Rigidbody2D rig;
 
@@ -23,7 +25,7 @@ public class Enemy : MonoBehaviour
 
 	MovmentPlayer player;
 
-	public int selectSprawl;
+	public int selectTakedown;
     public int random;
 
     float dist;	
@@ -50,7 +52,8 @@ public class Enemy : MonoBehaviour
         escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
-            selectSprawl = Random.Range(0, 3);
+            selectTakedown = probalidade.ChooseTakedown();
+                //Random.Range(0, 3);
 		}
 		else
 		{
@@ -92,7 +95,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if((cont >= 1 && dist >= distanciaSD) || (obj == null && escolha != 0 && selectSprawl != 0))
+        if((cont >= 1 && dist >= distanciaSD) || (obj == null && escolha != 0 && selectTakedown != 0))
         {
             velX = temp;
             anim.SetFloat("VelX", temp);
@@ -128,7 +131,7 @@ public class Enemy : MonoBehaviour
             if (escolha == 0)
             {
 
-                switch (selectSprawl)
+                switch (selectTakedown)
                 {
                     case 0:
                         //Vai da Takedown;
@@ -249,7 +252,7 @@ public class Enemy : MonoBehaviour
                         }
                         else if (random == 3)
                         {
-                            selectSprawl = 0;
+                            selectTakedown = 0;
                         }
                         break;
 
@@ -345,7 +348,8 @@ public class Enemy : MonoBehaviour
 	//escolhe oq vai fazer (soco, defesa, midtakedown)
 	IEnumerator SelectAttack()
 	{
-        selectAttack = Random.Range(0, 4);
+        selectAttack = probalidade.ChooseAttack();
+            //Random.Range(0, 4);
 
         umaVez = false;
 
@@ -457,7 +461,7 @@ public class Enemy : MonoBehaviour
                     anim.SetFloat("VelX", 0);
                     //cont = 0;
                     ReCombat();
-                    selectSprawl = 0;
+                    selectTakedown = 0;
                         //Random.Range(0, 4);
                     selectAttack = 0;
 					if (numAttack != 3)
@@ -508,7 +512,7 @@ public class Enemy : MonoBehaviour
         else
         {
             escolha = 1;
-            selectSprawl = 1;
+            selectTakedown = 1;
         }
 	}
 
@@ -535,7 +539,7 @@ public class Enemy : MonoBehaviour
 		anim.SetTrigger("Run");
         anda = true;
 		sprawl = false;
-		selectSprawl = 1;
+		selectTakedown = 1;
 		escolha = 0;
 		if(para)
 		{

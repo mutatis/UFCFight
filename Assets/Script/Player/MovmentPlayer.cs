@@ -321,7 +321,7 @@ public class MovmentPlayer : MonoBehaviour
         {
             obj = other.gameObject;
             other.gameObject.GetComponent<Enemy>().obj = gameObject;
-			if(obj.GetComponent<Enemy>().escolha != 0 && obj.GetComponent<Enemy>().selectSprawl != 0)
+			if(obj.GetComponent<Enemy>().escolha != 0 && obj.GetComponent<Enemy>().selectTakedown != 0)
 			{
 				obj.GetComponent<Enemy>().Combat();
 			}

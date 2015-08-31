@@ -3,48 +3,71 @@ using System.Collections;
 
 public class Probalidade : MonoBehaviour
 {
+    //takedown
+    public Takedown[] takedown;
+    int takedownEscolha = 0;
 
-    public Gift[] gifts;
-    int giftIndex = 0;
+    //attack
+    public Attack[] attack;
+    int attackEscolha = 0;
 
-	// Use this for initialization
-	void Start ()
-    {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	
-	}
-
-    int ChooseItem()
+    //escolhe attack
+    public int ChooseAttack()
     {
         float total = 0;
         int i = 0;
-        foreach (Gift elem in gifts)
+        foreach(Attack elem in attack)
+        {
+            total += elem.probalidade;
+        }
+
+        float randomPoint = Random.value * total;
+
+        for(i = 0; i < attack.Length; i++)
+        {
+            if (randomPoint < attack[i].probalidade)
+                return i;
+            else
+                randomPoint -= attack[i].probalidade;
+        }
+
+        return attack.Length - 1;
+    }
+
+    //escolhe takedown
+    public int ChooseTakedown()
+    {
+        float total = 0;
+        int i = 0;
+        foreach (Takedown elem in takedown)
         {
             total += elem.probability;
         }
 
         float randomPoint = Random.value * total;
 
-        for (i = 0; i < gifts.Length; i++)
+        for (i = 0; i < takedown.Length; i++)
         {
-            if (randomPoint < gifts[i].probability)
+            if (randomPoint < takedown[i].probability)
                 return i;
             else
-                randomPoint -= gifts[i].probability;
+                randomPoint -= takedown[i].probability;
         }
 
-        return gifts.Length - 1;
+        return takedown.Length - 1;
     }
 }
 
 [System.Serializable]
-public class Gift
+public class Takedown
 {
-    public GameObject item;
+    public string takedown;
     public float probability;
+}
+
+[System.Serializable]
+public class Attack
+{
+    public string attack;
+    public float probalidade;
 }
