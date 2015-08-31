@@ -6,9 +6,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour 
 {
 	public Animator anim;
-
-    public Probalidade probalidade;
-    
+        
 	public Rigidbody2D rig;
 
 	public float velX = -1.5f;
@@ -27,6 +25,8 @@ public class Enemy : MonoBehaviour
 
 	public int selectTakedown;
     public int random;
+
+    Probabilidade probalidade;
 
     float dist;	
 	float temp;
@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
 
 	void Start()
 	{
+        probalidade = GameObject.FindGameObjectWithTag("GameController").GetComponent<Probabilidade>();
         temp = velX;
 		anim.SetFloat ("VelX", velX);
         escolha = Random.Range (0, 2);

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Probalidade : MonoBehaviour
+public class Probabilidade : MonoBehaviour
 {
     //takedown
     public Takedown[] takedown;
