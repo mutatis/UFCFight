@@ -60,8 +60,6 @@ public class Probabilidade : MonoBehaviour
 public class Takedown
 {
     public string takedown;
-
-    //Valor da probabilidade (Range vc da um valor limite para seu codigo)
     [Range(0, 100)]
     public float probability;
 }
@@ -70,8 +68,6 @@ public class Takedown
 public class Attack
 {
     public string attack;
-
-    //Valor da probabilidade (Range vc da um valor limite para seu codigo)
     [Range(0, 100)]
     public float probalidade;
 }
