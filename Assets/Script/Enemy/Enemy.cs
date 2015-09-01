@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 	public int selectTakedown;
     public int random;
 
-    Probabilidade probalidade;
+    public Probabilidade probabilidade;
 
     float dist;	
 	float temp;
@@ -47,13 +47,12 @@ public class Enemy : MonoBehaviour
 
 	void Start()
 	{
-        probalidade = GameObject.FindGameObjectWithTag("GameController").GetComponent<Probabilidade>();
         temp = velX;
 		anim.SetFloat ("VelX", velX);
         escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
-            selectTakedown = probalidade.ChooseTakedown();
+            selectTakedown = probabilidade.ChooseTakedown();
                 //Random.Range(0, 3);
 		}
 		else
@@ -326,7 +325,6 @@ public class Enemy : MonoBehaviour
 	//tomo dano
 	public void Dano()
 	{
-		anim.SetTrigger("Dano");
         StopCoroutine("SelectAttack");
 		StartCoroutine ("SelectAttack");
         escolha = 1;
@@ -349,8 +347,9 @@ public class Enemy : MonoBehaviour
 	//escolhe oq vai fazer (soco, defesa, midtakedown)
 	IEnumerator SelectAttack()
 	{
-        selectAttack = probalidade.ChooseAttack();
-            //Random.Range(0, 4);
+        yield return new WaitForEndOfFrame();
+        selectAttack = probabilidade.ChooseAttack();
+        //Random.Range(0, 4);
 
         umaVez = false;
 
