@@ -456,6 +456,7 @@ public class Enemy : MonoBehaviour
 
                     //mid takedown
                 case 3:
+                    anim.SetTrigger("Jump");
                     rig.velocity = new Vector2(10, 2);
                     yield return new WaitForSeconds(0.5f);
                     rig.velocity = new Vector2(0, rig.velocity.y);
