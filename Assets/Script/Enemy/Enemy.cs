@@ -66,6 +66,8 @@ public class Enemy : MonoBehaviour
 	{
 		dist = Vector3.Distance(PlayerController.player.transform.position, transform.position);
 
+        print(dist);
+
         if(life <= 0)
         {
             anim.SetBool("Kill", true);
@@ -330,6 +332,8 @@ public class Enemy : MonoBehaviour
         escolha = 1;
 		ReCombat ();
 		rig.velocity = new Vector2 (6, 3);
+        anim.SetTrigger("Jump");
+        Kill();
 	}
 
 	//acerto o soco
