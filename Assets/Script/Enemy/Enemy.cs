@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
 		}
 		else
 		{
-			selectAttack = 0;
+            selectAttack = 0;
 				//Random.Range(0, 2);
 		}
 	}
