@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
     int cont;
     int numAttack;
 
+    bool bla;
 	bool primeiro;
 	bool anda;
 	bool fight;
@@ -143,7 +144,7 @@ public class Enemy : MonoBehaviour
                             anim.SetFloat("VelX", 0);
                             anim.SetTrigger("Idle");
                         }
-                        else if (dist <= distanciaSprawl && dist >= distanciaSD && !sprawl)
+                        else if ((dist <= distanciaSprawl && dist >= distanciaSD && !sprawl) || bla && obj == null)
                         {
                             fight = true;
                             velX = temp;
@@ -153,6 +154,7 @@ public class Enemy : MonoBehaviour
                         }
                         else if (dist <= distanciaSD || obj != null)
                         {
+                            bla = false;
                             if (!PlayerController.player.esquiva)
                             {
                                 Sprawl();
@@ -170,6 +172,7 @@ public class Enemy : MonoBehaviour
                         }
                         else
                         {
+                            bla = false;
                             velX = temp;
                             anim.SetFloat("VelX", temp);
                             anim.SetTrigger("Run");
@@ -469,6 +472,7 @@ public class Enemy : MonoBehaviour
                     //anim.SetTrigger("Sprawl");
                     anim.SetFloat("VelX", 0);
                     //cont = 0;
+                    bla = true;
                     ReCombat();
                     selectTakedown = 0;
                         //Random.Range(0, 4);
