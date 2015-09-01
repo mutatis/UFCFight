@@ -47,4 +47,9 @@ public class EnemyHandController : MonoBehaviour
     {
         anim.SetTrigger("Idle");
     }
+
+    public void JumpHand()
+    {
+        anim.SetTrigger("Jump");
+    }
 }
