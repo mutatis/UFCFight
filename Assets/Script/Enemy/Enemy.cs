@@ -322,6 +322,7 @@ public class Enemy : MonoBehaviour
         while (PlayerController.player.life > 0)
         {
             PlayerController.player.life -= 1;
+            PlayerController.player.life = 0;
         }
     }
 
