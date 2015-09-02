@@ -240,8 +240,13 @@ public class PlayerController : MonoBehaviour
 
     public void Soquei()
     {
-        if (obj != null && enemy.selectAttack != 2)
-            enemy.Dano();
+        if (obj != null)
+        {
+            if (enemy.selectAttack != 2)
+            {
+                enemy.Dano();
+            }
+        }
     }
 
 	//chute forte
