@@ -67,8 +67,6 @@ public class Enemy : MonoBehaviour
 	{
 		dist = Vector3.Distance(PlayerController.player.transform.position, transform.position);
 
-        print(dist);
-
         if(life <= 0)
         {
             anim.SetBool("Kill", true);
