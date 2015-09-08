@@ -3,14 +3,10 @@ using System.Collections;
 
 public class CriaCriador : MonoBehaviour 
 {
-	public SpriteRowCreator creator;
+    public GameObject enemy;
 
-	void OnTriggerEnter2D (Collider2D other)
+	public void Destroy ()
 	{
-		//se bateu no player cria sprite com outros inimigos
-		if(other.gameObject.tag == "Player")
-		{
-			creator.CreateSprites();
-		}
+        Destroy(enemy);
 	}
 }

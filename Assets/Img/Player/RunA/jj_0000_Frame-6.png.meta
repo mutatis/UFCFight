@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c8fed126b2f0ba2488e815e022608039
+guid: fc22a12594bcb794eb033dc4d250ea95
 timeCreated: 1438372097
 licenseType: Free
 TextureImporter:
@@ -49,7 +49,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites: []
-  spritePackingTag: JoanaRun
+  spritePackingTag: JoanaRunA
   userData: 
   assetBundleName: 
   assetBundleVariant: 

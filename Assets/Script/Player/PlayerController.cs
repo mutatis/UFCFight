@@ -240,6 +240,7 @@ public class PlayerController : MonoBehaviour
 
     public void Soquei()
     {
+        //verifica se pode dar dano
         if (obj != null)
         {
             if (enemy.selectAttack != 2)

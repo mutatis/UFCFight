@@ -333,7 +333,7 @@ public class Enemy : MonoBehaviour
 		StartCoroutine ("SelectAttack");
         escolha = 1;
 		ReCombat ();
-		rig.velocity = new Vector2 (7, 3.5f);
+		rig.velocity = new Vector2 (7, 3.7f);
         anim.SetTrigger("Jump");
         Kill();
 	}
@@ -462,7 +462,7 @@ public class Enemy : MonoBehaviour
                     //mid takedown
                 case 3:
                     anim.SetTrigger("Jump");
-                    rig.velocity = new Vector2(10, 2);
+                    rig.velocity = new Vector2(10, 4);
                     yield return new WaitForSeconds(0.5f);
                     rig.velocity = new Vector2(0, rig.velocity.y);
                     sprawl = false;
@@ -513,6 +513,7 @@ public class Enemy : MonoBehaviour
 	//morreu
 	public void Kill()
 	{
+        var x = 0;
         dano = false;
 		if(life <= 0)
 		{
