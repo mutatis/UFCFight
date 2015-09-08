@@ -513,7 +513,6 @@ public class Enemy : MonoBehaviour
 	//morreu
 	public void Kill()
 	{
-        var x = 0;
         dano = false;
 		if(life <= 0)
 		{
