@@ -329,6 +329,7 @@ public class Enemy : MonoBehaviour
 	//tomo dano
 	public void Dano()
 	{
+        print("Porrada");
         StopCoroutine("SelectAttack");
 		StartCoroutine ("SelectAttack");
         escolha = 1;
