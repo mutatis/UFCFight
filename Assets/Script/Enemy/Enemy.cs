@@ -53,8 +53,7 @@ public class Enemy : MonoBehaviour
         escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
-            selectTakedown = 0;
-                //probabilidade.ChooseTakedown();
+            selectTakedown = probabilidade.ChooseTakedown();
                 //Random.Range(0, 3);
 		}
 		else
@@ -160,7 +159,7 @@ public class Enemy : MonoBehaviour
                             }
                             else
                             {
-                                PlayerController.player.Sprawl();
+                                PlayerController.player.anim.SetTrigger("Sprawl");
                                 PlayerController.player.isEsquiva = true;
                                 anim.SetFloat("VelX", 0);
                                 anim.SetTrigger("Idle");
@@ -365,12 +364,10 @@ public class Enemy : MonoBehaviour
 		{
 			if(!primeiro)
 			{
+                selectAttack = 0;
 				primeiro = true;
 			}
-			else
-			{
-				yield return new WaitForSeconds (1);
-			}
+		    yield return new WaitForSeconds (1);
 			if(obj != null)
 			{
 				player = obj.GetComponent<PlayerController> ();
