@@ -165,6 +165,11 @@ public class PlayerController : MonoBehaviour
         delayEsquiva = false;
     }
 
+    public void Sprawl()
+    {
+        anim.SetTrigger("Sprawl");
+    }
+
 	//tomo dano	
     public void Dano()
     {

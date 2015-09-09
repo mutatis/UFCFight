@@ -53,7 +53,8 @@ public class Enemy : MonoBehaviour
         escolha = Random.Range (0, 2);
 		if(escolha == 0)
 		{
-            selectTakedown = probabilidade.ChooseTakedown();
+            selectTakedown = 0;
+                //probabilidade.ChooseTakedown();
                 //Random.Range(0, 3);
 		}
 		else
@@ -159,8 +160,8 @@ public class Enemy : MonoBehaviour
                             }
                             else
                             {
+                                PlayerController.player.Sprawl();
                                 PlayerController.player.isEsquiva = true;
-                                PlayerController.player.Esquivei();
                                 anim.SetFloat("VelX", 0);
                                 anim.SetTrigger("Idle");
                                 Combat();
