@@ -88,7 +88,7 @@ public class SpriteRowCreator : MonoBehaviour
             if (hasEndTerminator && i == (howMany-1))
                 newInstance = ReplaceInstanceByNewOne (newInstance, endTerminator);
             
-                newInstance.transform.parent = null;
+                newInstance.transform.parent = transform;
         }
     }
 
