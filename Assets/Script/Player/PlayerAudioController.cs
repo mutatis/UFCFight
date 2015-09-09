@@ -77,12 +77,13 @@ public class PlayerAudioController : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], transform.position, 1f);
         }
+        Grito();
         isCarrega = false;
     }
 
     public void Grito()
     {
-        AudioSource.PlayClipAtPoint(grito[Random.Range(0, grito.Length)], transform.position, 0.3f);
+        AudioSource.PlayClipAtPoint(grito[Random.Range(0, grito.Length)], transform.position, 1f);
     }
 
     //som de socoForte
