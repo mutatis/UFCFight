@@ -491,7 +491,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine("AntiBug");
     }
 
-    IEnumerator AntiBug()
+    IEnumerator AntiBugAttack()
     {
         var tipo = selectAttack;
         yield return new WaitForSeconds(1);
