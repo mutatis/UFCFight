@@ -486,9 +486,9 @@ public class Enemy : MonoBehaviour
     public void PP()
     {
         StopCoroutine("SelectAttack");
-        StopCoroutine("AntiBugAttack()");
+        StopCoroutine("AntiBugAttack");
         StartCoroutine("SelectAttack");
-        StartCoroutine("AntiBugAttack()");
+        StartCoroutine("AntiBugAttack");
     }
 
     IEnumerator AntiBugAttack()
