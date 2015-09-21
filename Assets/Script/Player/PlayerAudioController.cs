@@ -35,7 +35,7 @@ public class PlayerAudioController : MonoBehaviour
 
         if(PlayerController.player.isEsquiva)
         {
-            AudioSource.PlayClipAtPoint(esquiva, transform.position, 1f);
+            AudioSource.PlayClipAtPoint(esquiva, Camera.main.transform.position, 1f);
             PlayerController.player.isEsquiva = false;
         }
 
@@ -48,7 +48,7 @@ public class PlayerAudioController : MonoBehaviour
     //inimigo defendeu
     public void BlockEnemy()
     {
-        AudioSource.PlayClipAtPoint(blockEnemy, transform.position, 1f);
+        AudioSource.PlayClipAtPoint(blockEnemy, Camera.main.transform.position, 1f);
     }
 
     public void PrimeiroSoco()
@@ -56,12 +56,12 @@ public class PlayerAudioController : MonoBehaviour
         if (PlayerController.player.obj != null)
         {
             obj = true;
-            AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], transform.position, 0.5f);
+            AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], Camera.main.transform.position, 0.5f);
         }
         else
         {
             obj = false;
-            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], transform.position, 0.5f);
+            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], Camera.main.transform.position, 0.5f);
         }
         isCarrega = false;
     }
@@ -71,11 +71,11 @@ public class PlayerAudioController : MonoBehaviour
     {
         if (obj)
         {
-            AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], transform.position, 1f);
+            AudioSource.PlayClipAtPoint(soco[Random.Range(0, soco.Length)], Camera.main.transform.position, 1f);
         }
         else
         {
-            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], transform.position, 1f);
+            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], Camera.main.transform.position, 1f);
         }
         Grito();
         isCarrega = false;
@@ -83,7 +83,7 @@ public class PlayerAudioController : MonoBehaviour
 
     public void Grito()
     {
-        AudioSource.PlayClipAtPoint(grito[Random.Range(0, grito.Length)], transform.position, 1f);
+        AudioSource.PlayClipAtPoint(grito[Random.Range(0, grito.Length)], Camera.main.transform.position, 1f);
     }
 
     //som de socoForte
@@ -92,13 +92,13 @@ public class PlayerAudioController : MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("Carrega"));
         if (PlayerController.player.obj != null)
         {
-            AudioSource.PlayClipAtPoint(chute, transform.position, 1f);
+            AudioSource.PlayClipAtPoint(chute, Camera.main.transform.position, 1f);
         }
         else
         {
-            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], transform.position, 1f);
+            AudioSource.PlayClipAtPoint(socoVento[Random.Range(0, socoVento.Length)], Camera.main.transform.position, 1f);
         }
-        AudioSource.PlayClipAtPoint(gritoChute, transform.position, 0.3f);
+        AudioSource.PlayClipAtPoint(gritoChute, Camera.main.transform.position, 0.3f);
         isCarrega = false;
     }
     
@@ -117,7 +117,7 @@ public class PlayerAudioController : MonoBehaviour
     {
         if (PlayerController.player.esquiva)
         {
-            AudioSource.PlayClipAtPoint(sprawl, transform.position, 1f);
+            AudioSource.PlayClipAtPoint(sprawl, Camera.main.transform.position, 1f);
         }
     }
 }

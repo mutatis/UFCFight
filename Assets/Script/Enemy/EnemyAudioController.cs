@@ -12,7 +12,7 @@ public class EnemyAudioController : MonoBehaviour
     {
         if (!tocaT)
         {
-            AudioSource.PlayClipAtPoint(takedown, transform.position, 1f);
+            AudioSource.PlayClipAtPoint(takedown, Camera.main.transform.position, 1f);
             tocaT = true;
         }
     }
