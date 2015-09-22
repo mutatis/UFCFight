@@ -6,6 +6,7 @@ using System.Collections;
 public class GameMaster : MonoBehaviour 
 {
 	public static GameMaster master;
+    public AudioSource audio;
 
 	[HideInInspector]
 	public int vitorias;
@@ -14,4 +15,16 @@ public class GameMaster : MonoBehaviour
 	{
 		master = this;
 	}
+
+    void Update()
+    {
+        if (Time.timeScale == 0)
+        {
+            audio.volume = 0.3f;
+        }
+        else
+        {
+            audio.volume = 1;
+        }
+    }
 }
