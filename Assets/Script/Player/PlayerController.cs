@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour
                 delayEsquiva = true;
                 StartCoroutine("Delay");
 				StopCoroutine("HeavyAttack");
+                audioController.Sprawl();
             }
             else if (Input.GetKeyUp(KeyCode.RightArrow) && !esquiva && !attackPower)
             {
